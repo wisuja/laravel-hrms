@@ -13,7 +13,7 @@
 </div>
 {{-- End of Hero Section --}}
 
-<div class="container pb-5">
+<div class="container pb-5" id="announcements">
     {{-- Announcements --}}
     <div class="row">
         <div class="col-12 text-center mt-5">
@@ -45,7 +45,7 @@
     {{-- End of Announcements --}}
 
     {{-- Job Recruitments --}}
-    <div class="row mt-5">
+    <div class="row mt-5" id="recruitments">
         <div class="col-12 text-center mt-5">
             <h3>Recruitments</h3>
             <div class="line text-center"> &nbsp;</div>
