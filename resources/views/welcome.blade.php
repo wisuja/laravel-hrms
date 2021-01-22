@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('nav')
+    @include('components.nav')
+@endsection
+
 @section('content')
 {{-- Hero Section --}}
 <div class="container-fluid my-0 py-0">

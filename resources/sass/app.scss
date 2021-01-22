@@ -7,6 +7,12 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+// Font Awesome
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+
 $primary: #72adff;
 
 html {
@@ -22,9 +28,104 @@ html {
 
         .line {
             border-bottom: $primary solid 3px;
-            width: 250px;
+            width: 300px;
             height: 0;
             margin: 1rem auto;
+        }
+
+        .wrapper {
+            display: flex;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin: -1.5rem 0;
+        }
+
+        .toggleSidebar {
+            margin-left: -300px;
+        }
+
+        #sidebar {
+            min-width: 300px;
+            max-width: 300px;
+            height: 100vh;
+            background: #7386d5;
+            color: white;
+            transition: all 0.3s;
+
+            i {
+                width: 15px !important;
+            }
+
+            .sidebar-header {
+                padding: 20px;
+                background: #6d7fcc;
+            }
+
+            ul .components {
+                padding: 20px 0;
+                border-bottom: 1px solid #47748b;
+            }
+
+            ul {
+                p {
+                    color: white;
+                    padding: 10px;
+                }
+
+                li {
+                    a {
+                        padding: 10px;
+                        font-size: 1.1em;
+                        display: block;
+                        color: white;
+                    }
+
+                    a:hover {
+                        color: #7385d5;
+                        background: white;
+                    }
+                }
+            }
+
+            ul li .active > a,
+            a[aria-expanded="true"] {
+                color: #fff;
+                background: #6d7fcc;
+            }
+        }
+
+        a[data-toggle="collapse"] {
+            position: relative;
+        }
+
+        .dropdown-toggle::after {
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+        }
+
+        ul ul a {
+            font-size: 0.9em !important;
+            padding-left: 30px !important;
+            background: #6d7fcc;
+        }
+
+        #content {
+            width: 100%;
+            padding: 20px;
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+
+        .toggleSidebarButton {
+            background: #7385d5 !important;
+            transition: all 0.3s;
+        }
+
+        .toggleSidebarButton:hover {
+            background: #72adff !important;
         }
     }
 }
