@@ -10004,14 +10004,17 @@ h3 {
     border-color: #dee2e6;
   }
 }
-body .hero {
+html {
+  scroll-behavior: smooth;
+}
+html body .hero {
   background: url(/images/hero.jpg?f411f2fa56ef5a52d7dcaaa924ee2f73);
   background-repeat: no-repeat;
   background-size: cover;
   height: 95vh;
   margin-top: -1.5rem;
 }
-body .line {
+html body .line {
   border-bottom: #72adff solid 3px;
   width: 250px;
   height: 0;

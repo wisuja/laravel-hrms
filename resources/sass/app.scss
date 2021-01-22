@@ -9,19 +9,22 @@
 
 $primary: #72adff;
 
-body {
-    .hero {
-        background: url("../../public/images/hero.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 95vh;
-        margin-top: -1.5rem;
-    }
+html {
+    scroll-behavior: smooth;
+    body {
+        .hero {
+            background: url("../../public/images/hero.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 95vh;
+            margin-top: -1.5rem;
+        }
 
-    .line {
-        border-bottom: $primary solid 3px;
-        width: 250px;
-        height: 0;
-        margin: 1rem auto;
+        .line {
+            border-bottom: $primary solid 3px;
+            width: 250px;
+            height: 0;
+            margin: 1rem auto;
+        }
     }
 }
