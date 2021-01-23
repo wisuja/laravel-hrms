@@ -45,7 +45,6 @@ html {
             #sidebar {
                 min-width: 300px;
                 max-width: 300px;
-                min-height: 100vh;
                 background: #7386d5;
                 color: white;
                 transition: all 0.3s;
@@ -115,9 +114,9 @@ html {
             background: #6d7fcc;
         }
 
-        #content {
+        .content {
             width: 100%;
-            padding: 20px;
+            // padding: 20px;
             min-height: 100vh;
             transition: all 0.3s;
         }

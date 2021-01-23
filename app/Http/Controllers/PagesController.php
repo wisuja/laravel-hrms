@@ -16,10 +16,10 @@ class PagesController extends Controller
     public function index () {
         $announcements = resolve(Announcement::class)->get();
         $recruitments = resolve(Recruitment::class)->get();
-        return view('welcome', compact('announcements', 'recruitments'));
+        return view('pages.welcome', compact('announcements', 'recruitments'));
     }
 
     public function dashboard () {
-        return view('home');
+        return view('pages.dashboard');
     }
 }
