@@ -1,6 +1,8 @@
 <nav id="sidebar" class="navbar-nav">
   <div class="sidebar-header">
-      <h3>HRMS</h3>
+    <a class="navbar-brand text-white" href="{{ url('/dashboard') }}">
+        <h3> {{ config('app.name', 'Laravel') }}</h3>
+    </a>
   </div>
   <ul class="list-unstyled components">
       <div class="d-flex justify-content-center align-items-center my-3">

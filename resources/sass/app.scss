@@ -18,6 +18,9 @@ $primary: #72adff;
 html {
     scroll-behavior: smooth;
     body {
+        margin: 0;
+        padding: 0;
+
         .hero {
             background: url("../../public/images/hero.jpg");
             background-repeat: no-repeat;
@@ -38,60 +41,60 @@ html {
             text-decoration: none;
             transition: all 0.3s;
             margin: -1.5rem 0;
+
+            #sidebar {
+                min-width: 300px;
+                max-width: 300px;
+                min-height: 100vh;
+                background: #7386d5;
+                color: white;
+                transition: all 0.3s;
+
+                i {
+                    width: 15px !important;
+                }
+
+                .sidebar-header {
+                    padding: 20px;
+                    background: #6d7fcc;
+                }
+
+                ul .components {
+                    padding: 20px 0;
+                    border-bottom: 1px solid #47748b;
+                }
+
+                ul {
+                    p {
+                        color: white;
+                        padding: 10px;
+                    }
+
+                    li {
+                        a {
+                            padding: 10px;
+                            font-size: 1.1em;
+                            display: block;
+                            color: white;
+                        }
+
+                        a:hover {
+                            color: #7385d5;
+                            background: white;
+                        }
+                    }
+                }
+
+                ul li .active > a,
+                a[aria-expanded="true"] {
+                    color: #fff;
+                    background: #6d7fcc;
+                }
+            }
         }
 
         .toggleSidebar {
             margin-left: -300px;
-        }
-
-        #sidebar {
-            min-width: 300px;
-            max-width: 300px;
-            height: 100vh;
-            background: #7386d5;
-            color: white;
-            transition: all 0.3s;
-
-            i {
-                width: 15px !important;
-            }
-
-            .sidebar-header {
-                padding: 20px;
-                background: #6d7fcc;
-            }
-
-            ul .components {
-                padding: 20px 0;
-                border-bottom: 1px solid #47748b;
-            }
-
-            ul {
-                p {
-                    color: white;
-                    padding: 10px;
-                }
-
-                li {
-                    a {
-                        padding: 10px;
-                        font-size: 1.1em;
-                        display: block;
-                        color: white;
-                    }
-
-                    a:hover {
-                        color: #7385d5;
-                        background: white;
-                    }
-                }
-            }
-
-            ul li .active > a,
-            a[aria-expanded="true"] {
-                color: #fff;
-                background: #6d7fcc;
-            }
         }
 
         a[data-toggle="collapse"] {

@@ -16136,6 +16136,10 @@ readers do not read off random characters that represent icons */
 html {
   scroll-behavior: smooth;
 }
+html body {
+  margin: 0;
+  padding: 0;
+}
 html body .hero {
   background: url(/images/hero.jpg?f411f2fa56ef5a52d7dcaaa924ee2f73);
   background-repeat: no-repeat;
@@ -16155,46 +16159,46 @@ html body .wrapper {
   transition: all 0.3s;
   margin: -1.5rem 0;
 }
-html body .toggleSidebar {
-  margin-left: -300px;
-}
-html body #sidebar {
+html body .wrapper #sidebar {
   min-width: 300px;
   max-width: 300px;
-  height: 100vh;
+  min-height: 100vh;
   background: #7386d5;
   color: white;
   transition: all 0.3s;
 }
-html body #sidebar i {
+html body .wrapper #sidebar i {
   width: 15px !important;
 }
-html body #sidebar .sidebar-header {
+html body .wrapper #sidebar .sidebar-header {
   padding: 20px;
   background: #6d7fcc;
 }
-html body #sidebar ul .components {
+html body .wrapper #sidebar ul .components {
   padding: 20px 0;
   border-bottom: 1px solid #47748b;
 }
-html body #sidebar ul p {
+html body .wrapper #sidebar ul p {
   color: white;
   padding: 10px;
 }
-html body #sidebar ul li a {
+html body .wrapper #sidebar ul li a {
   padding: 10px;
   font-size: 1.1em;
   display: block;
   color: white;
 }
-html body #sidebar ul li a:hover {
+html body .wrapper #sidebar ul li a:hover {
   color: #7385d5;
   background: white;
 }
-html body #sidebar ul li .active > a,
-html body #sidebar a[aria-expanded=true] {
+html body .wrapper #sidebar ul li .active > a,
+html body .wrapper #sidebar a[aria-expanded=true] {
   color: #fff;
   background: #6d7fcc;
+}
+html body .toggleSidebar {
+  margin-left: -300px;
 }
 html body a[data-toggle=collapse] {
   position: relative;
