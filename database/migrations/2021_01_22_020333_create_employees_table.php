@@ -25,10 +25,10 @@ class CreateEmployeesTable extends Migration
             $table->boolean('is_active')->default(true);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('department_id')->references('id')->on('departments');
-            $table->foreign('position_id')->references('id')->on('positions');
-            $table->foreign('head_of')->references('id')->on('departments');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
+            $table->foreign('position_id')->references('id')->on('positions')->onDelete('set null');
+            $table->foreign('head_of')->references('id')->on('departments')->onDelete('set null');
         });
     }
 

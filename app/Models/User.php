@@ -40,4 +40,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function employee () {
+        return $this->hasOne(Employee::class);
+    }
+
+    public function get($count = 10) {
+        return $this->with('role')->latest()->paginate($count);
+    }
+
+    public function getProfile() {
+        return $this->with('employee')->where('id', auth()->id())->first();
+    }
 }

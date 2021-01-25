@@ -16226,3 +16226,7 @@ html body .toggleSidebarButton {
 html body .toggleSidebarButton:hover {
   background: #72adff !important;
 }
+html body .scrollable {
+  overflow-y: scroll;
+  max-height: 400px;
+}

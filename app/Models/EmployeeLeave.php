@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class EmployeeLeave extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function get($count = 10) {
+        
+    }
 }

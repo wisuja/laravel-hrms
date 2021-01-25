@@ -30,7 +30,7 @@ class CreateEmployeeDetailsTable extends Migration
             $table->integer('work_experience_in_year');
             $table->timestamps();
 
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
     }
 

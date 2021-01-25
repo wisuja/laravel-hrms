@@ -22,13 +22,8 @@ class CreateAnnouncementsTable extends Migration
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
 
-            $table->foreign('department_id')
-                ->references('id')
-                ->on('departments');
-
-            $table->foreign('created_by')
-                ->references('id')
-                ->on('employees');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
+            $table->foreign('created_by')->references('id')->on('employees')->onDelete('cascade');
         });
     }
 

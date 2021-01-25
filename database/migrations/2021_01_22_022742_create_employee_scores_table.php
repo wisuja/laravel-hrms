@@ -21,9 +21,9 @@ class CreateEmployeeScoresTable extends Migration
             $table->unsignedBigInteger('scored_by');
             $table->timestamps();
 
-            $table->foreign('employee_id')->references('id')->on('employees');
-            $table->foreign('score_category_id')->references('id')->on('score_categories');
-            $table->foreign('scored_by')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('score_category_id')->references('id')->on('score_categories')->onDelete('set null');
+            $table->foreign('scored_by')->references('id')->on('employees')->onDelete('set null');
         });
     }
 

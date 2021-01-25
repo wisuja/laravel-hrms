@@ -21,17 +21,11 @@ class CreateAttendancesTable extends Migration
             $table->string('message')->nullable();
             $table->timestamps();
 
-            $table->foreign('employee_id')
-                ->references('id')
-                ->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
 
-            $table->foreign('attendance_time_id')
-                ->references('id')
-                ->on('attendance_times');
+            $table->foreign('attendance_time_id')->references('id')->on('attendance_times')->onDelete('set null');
 
-            $table->foreign('attendance_type_id')
-                ->references('id')
-                ->on('attendance_types');
+            $table->foreign('attendance_type_id')->references('id')->on('attendance_types')->onDelete('set null');
         });
     }
 
