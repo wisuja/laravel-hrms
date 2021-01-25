@@ -19,8 +19,8 @@ class CreateEmployeesTable extends Migration
             $table->string('name');
             $table->date('start_of_contract');
             $table->date('end_of_contract');
-            $table->unsignedBigInteger('department_id');
-            $table->unsignedBigInteger('position_id');
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('position_id')->nullable();
             $table->unsignedBigInteger('head_of')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();

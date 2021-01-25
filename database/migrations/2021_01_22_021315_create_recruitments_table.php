@@ -23,7 +23,6 @@ class CreateRecruitmentsTable extends Migration
             $table->timestamps();
 
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
-            $table->foreign('is_active')->references('open_for_recruitment')->on('positions')->onDelete('cascade');
         });
     }
 
