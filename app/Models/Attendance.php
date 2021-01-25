@@ -2,10 +2,33 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+    
+    public function employee() {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function attendanceTime() {
+        return $this->belongsTo(AttendanceTime::class);
+    }
+
+    public function attendanceType() {
+        return $this->belongsTo(AttendanceType::class);
+    }
+
+    public function get ($count = 10) {
+        return $this->with('employee', 'attendanceTime', 'attendanceType')->latest()->paginate($count);
+    }
+
+    public function getCreatedAtAttribute($value) {
+        return Carbon::parse($value)->format('d-m-Y h:m:s');
+    }
 }

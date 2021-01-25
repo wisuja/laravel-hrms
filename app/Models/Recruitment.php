@@ -11,7 +11,15 @@ class Recruitment extends Model
 
     protected $guarded = [];
 
+    public function position () {
+        return $this->belongsTo(Position::class);
+    }
+
     public function get($count = 3) {
-        return Recruitment::latest()->take($count)->get();
+        return $this->latest()->take($count)->get();
+    }
+
+    public function paginate($count = 10) {
+        return $this->with('position')->latest()->paginate($count);
     }
 }

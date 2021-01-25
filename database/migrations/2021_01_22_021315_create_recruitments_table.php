@@ -19,10 +19,11 @@ class CreateRecruitmentsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('attachment')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active');
             $table->timestamps();
 
             $table->foreign('position_id')->references('id')->on('positions');
+            $table->foreign('is_active')->references('open_for_recruitment')->on('positions');
         });
     }
 

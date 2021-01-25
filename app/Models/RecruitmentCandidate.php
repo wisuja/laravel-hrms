@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class RecruitmentCandidate extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function getCount() {
+        return $this->count();
+    }
 }
