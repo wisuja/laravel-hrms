@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
 
 class RecruitmentsController extends Controller
 {
     private $recruitments;
-    private $accesses;
 
     public function __construct()
     {
         $this->recruitments = resolve(Recruitment::class);
-        $this->accesses = resolve(Access::class);
     }
     /**
      * Display a listing of the resource.
@@ -23,9 +20,8 @@ class RecruitmentsController extends Controller
      */
     public function index()
     {
-        $accesses = $this->accesses->get(true);
         $recruitments = $this->recruitments->paginate();
-        return view('pages.recruitments', compact('accesses','recruitments'));
+        return view('pages.recruitments', compact('recruitments'));
     }
 
     /**

@@ -37,6 +37,7 @@ Auth::routes([
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/employees-data', [EmployeesController::class, 'index'])->name('employees-data');
+Route::get('/employees-data/create', [EmployeesController::class, 'create'])->name('employees-data.create');
 Route::get('/departments-data', [DepartmentsController::class, 'index'])->name('departments-data');
 Route::get('/positions-data', [PositionsController::class, 'index'])->name('positions-data');
 Route::get('/employees-performance-score', [EmployeeScoresController::class, 'index'])->name('employees-performance-score');

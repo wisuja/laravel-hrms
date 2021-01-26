@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
     private $employees;
-    private $accesses;
 
     public function __construct()
     {
         $this->middleware('auth');  
         
         $this->employees = resolve(Employee::class);
-        $this->accesses = resolve(Access::class);
     }
 
     /**
@@ -27,8 +24,7 @@ class EmployeesController extends Controller
     public function index()
     {
         $employees = $this->employees->get();
-        $accesses = $this->accesses->get(true);
-        return view('pages.employees-data', compact('accesses','employees'));
+        return view('pages.employees-data', compact('employees'));
     }
 
     /**
@@ -38,7 +34,7 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.employees-data_create');
     }
 
     /**

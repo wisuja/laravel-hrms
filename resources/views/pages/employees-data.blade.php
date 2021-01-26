@@ -13,7 +13,7 @@
     <div class="col-12 mb-3">
       <div class="bg-light text-dark card p-3 overflow-auto">
         <div class="d-flex justify-content-between">
-          <a href="#" class="btn btn-outline-dark mb-3 w-25">
+          <a href="{{ route('employees-data.create') }}" class="btn btn-outline-dark mb-3 w-25">
             <i class="fas fa-print mr-1"></i>
               <span> Create</span>
           </a>

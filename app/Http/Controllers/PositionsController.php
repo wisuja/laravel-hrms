@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\Position;
 use Illuminate\Http\Request;
 
 class PositionsController extends Controller
 {
     private $positions;
-    private $accesses;
 
     public function __construct()
     {
         $this->positions = resolve(Position::class);
-        $this->accesses = resolve(Access::class);
     }
     /**
      * Display a listing of the resource.
@@ -24,8 +21,7 @@ class PositionsController extends Controller
     public function index()
     {
         $positions = $this->positions->get();
-        $accesses = $this->accesses->get(true);
-        return view('pages.positions-data', compact('accesses','positions'));
+        return view('pages.positions-data', compact('positions'));
     }
 
     /**

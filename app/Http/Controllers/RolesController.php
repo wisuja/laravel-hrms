@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
 {
     private $roles;
-    private $accesses;
 
     public function __construct()
     {
         $this->roles = resolve(Role::class);
-        $this->accesses = resolve(Access::class);
     }
 
     /**
@@ -24,9 +21,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $accesses = $this->accesses->get(true);
         $roles = $this->roles->get();
-        return view('pages.roles', compact('accesses','roles'));
+        return view('pages.roles', compact('roles'));
     }
 
     /**

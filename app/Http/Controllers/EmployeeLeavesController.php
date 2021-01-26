@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\Employee;
 use App\Models\EmployeeLeaves;
 use Illuminate\Http\Request;
@@ -10,12 +9,10 @@ use Illuminate\Http\Request;
 class EmployeeLeavesController extends Controller
 {
     private $employees;
-    private $accesses;
 
     public function __construct()
     {
         $this->employees = resolve(Employee::class);
-        $this->accesses = resolve(Access::class);
     }
     /**
      * Display a listing of the resource.
@@ -24,9 +21,8 @@ class EmployeeLeavesController extends Controller
      */
     public function index()
     {
-        $accesses = $this->accesses->get(true);
         $employeeLeaves = $this->employees->getEmployeeLeaveData();
-        return view('pages.employees-leave', compact('accesses','employeeLeaves'));
+        return view('pages.employees-leave', compact('employeeLeaves'));
     }
 
     /**

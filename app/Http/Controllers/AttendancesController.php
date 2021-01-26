@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
 
 class AttendancesController extends Controller
 {
     private $attendances;
-    private $accesses;
 
     public function __construct()
     {
         $this->attendances = resolve(Attendance::class);
-        $this->accesses = resolve(Access::class);
     }
 
     /**
@@ -25,8 +22,7 @@ class AttendancesController extends Controller
     public function index()
     {
         $attendances = $this->attendances->get();
-        $accesses = $this->accesses->get(true);
-        return view('pages.attendances', compact('accesses','attendances'));
+        return view('pages.attendances', compact('attendances'));
     }
 
     /**

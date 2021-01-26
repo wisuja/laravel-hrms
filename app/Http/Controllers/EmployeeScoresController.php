@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\EmployeeScore;
 use Illuminate\Http\Request;
 
 class EmployeeScoresController extends Controller
 {
     private $employeeScores;
-    private $accesses;
 
     public function __construct()
     {
         $this->employeeScores = resolve(EmployeeScore::class);
-        $this->accesses = resolve(Access::class);
     }
     /**
      * Display a listing of the resource.
@@ -23,9 +20,8 @@ class EmployeeScoresController extends Controller
      */
     public function index()
     {
-        $accesses = $this->accesses->get(true);
         $employeeScores = $this->employeeScores->getSimplifiedScores();
-        return view('pages.employees-performance-score', compact('accesses','employeeScores'));
+        return view('pages.employees-performance-score', compact('employeeScores'));
     }
 
     /**
