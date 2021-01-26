@@ -1,6 +1,18 @@
 <?php
 
-use App\Http\Controllers\PagesController;
+use App\Http\Controllers\AnnouncementsController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\AttendancesController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\EmployeeLeavesController;
+use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\EmployeeScoresController;
+use App\Http\Controllers\PositionsController;
+use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\RecruitmentsController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,16 +34,16 @@ Auth::routes([
 ]);
 
 
-Route::get('/', [PagesController::class, 'index'])->name('welcome');
-Route::get('/dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
-Route::get('/employees-data', [PagesController::class, 'employeesData'])->name('employees-data');
-Route::get('/departments-data', [PagesController::class, 'departmentsData'])->name('departments-data');
-Route::get('/positions-data', [PagesController::class, 'positionsData'])->name('positions-data');
-Route::get('/employees-performance-score', [PagesController::class, 'employeesPerformanceScore'])->name('employees-performance-score');
-Route::get('/employees-leave', [PagesController::class, 'employeesLeave'])->name('employees-leave');
-Route::get('/attendances', [PagesController::class, 'attendances'])->name('attendances');
-Route::get('/announcements', [PagesController::class, 'announcements'])->name('announcements');
-Route::get('/recruitments', [PagesController::class, 'recruitments'])->name('recruitments');
-Route::get('/users', [PagesController::class, 'users'])->name('users');
-Route::get('/roles', [PagesController::class, 'roles'])->name('roles');
-Route::get('/profile', [PagesController::class, 'profile'])->name('profile');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/employees-data', [EmployeesController::class, 'index'])->name('employees-data');
+Route::get('/departments-data', [DepartmentsController::class, 'index'])->name('departments-data');
+Route::get('/positions-data', [PositionsController::class, 'index'])->name('positions-data');
+Route::get('/employees-performance-score', [EmployeeScoresController::class, 'index'])->name('employees-performance-score');
+Route::get('/employees-leave', [EmployeeLeavesController::class, 'index'])->name('employees-leave');
+Route::get('/attendances', [AttendancesController::class, 'index'])->name('attendances');
+Route::get('/announcements', [AnnouncementsController::class, 'index'])->name('announcements');
+Route::get('/recruitments', [RecruitmentsController::class, 'index'])->name('recruitments');
+Route::get('/users', [UsersController::class, 'index'])->name('users');
+Route::get('/roles', [RolesController::class, 'index'])->name('roles');
+Route::get('/profile', [ProfilesController::class, 'index'])->name('profile');

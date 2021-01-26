@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\Access;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class AttendancesController extends Controller
 {
+    private $attendances;
+    private $accesses;
+
+    public function __construct()
+    {
+        $this->attendances = resolve(Attendance::class);
+        $this->accesses = resolve(Access::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        $attendances = $this->attendances->get();
+        $accesses = $this->accesses->get(true);
+        return view('pages.attendances', compact('accesses','attendances'));
     }
 
     /**
@@ -41,10 +53,10 @@ class DepartmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function show(Department $department)
+    public function show(Attendance $attendance)
     {
         //
     }
@@ -52,10 +64,10 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function edit(Department $department)
+    public function edit(Attendance $attendance)
     {
         //
     }
@@ -64,10 +76,10 @@ class DepartmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request, Attendance $attendance)
     {
         //
     }
@@ -75,10 +87,10 @@ class DepartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Department $department)
+    public function destroy(Attendance $attendance)
     {
         //
     }

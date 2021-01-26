@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recruitment;
+use App\Models\Access;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
-class RecruitmentController extends Controller
+class DepartmentsController extends Controller
 {
+    private $departments;
+    private $accesses;
+
+    public function __construct()
+    {
+        $this->departments = resolve(Department::class);
+        $this->accesses = resolve(Access::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,9 @@ class RecruitmentController extends Controller
      */
     public function index()
     {
-        //
+        $departments = $this->departments->get();
+        $accesses = $this->accesses->get(true);
+        return view('pages.departments-data', compact('accesses','departments'));
     }
 
     /**
@@ -41,10 +52,10 @@ class RecruitmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Recruitment  $recruitment
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function show(Recruitment $recruitment)
+    public function show(Department $department)
     {
         //
     }
@@ -52,10 +63,10 @@ class RecruitmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Recruitment  $recruitment
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(Recruitment $recruitment)
+    public function edit(Department $department)
     {
         //
     }
@@ -64,10 +75,10 @@ class RecruitmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Recruitment  $recruitment
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recruitment $recruitment)
+    public function update(Request $request, Department $department)
     {
         //
     }
@@ -75,10 +86,10 @@ class RecruitmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Recruitment  $recruitment
+     * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recruitment $recruitment)
+    public function destroy(Department $department)
     {
         //
     }

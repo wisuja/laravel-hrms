@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EmployeeLeaveRequest;
+use App\Models\RecruitmentCandidate;
 use Illuminate\Http\Request;
 
-class EmployeeLeaveRequestController extends Controller
+class RecruitmentCandidatesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class EmployeeLeaveRequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EmployeeLeaveRequest  $employeeLeaveRequest
+     * @param  \App\Models\RecruitmentCandidate  $recruitmentCandidate
      * @return \Illuminate\Http\Response
      */
-    public function show(EmployeeLeaveRequest $employeeLeaveRequest)
+    public function show(RecruitmentCandidate $recruitmentCandidate)
     {
         //
     }
@@ -52,10 +52,10 @@ class EmployeeLeaveRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EmployeeLeaveRequest  $employeeLeaveRequest
+     * @param  \App\Models\RecruitmentCandidate  $recruitmentCandidate
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmployeeLeaveRequest $employeeLeaveRequest)
+    public function edit(RecruitmentCandidate $recruitmentCandidate)
     {
         //
     }
@@ -64,10 +64,10 @@ class EmployeeLeaveRequestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EmployeeLeaveRequest  $employeeLeaveRequest
+     * @param  \App\Models\RecruitmentCandidate  $recruitmentCandidate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmployeeLeaveRequest $employeeLeaveRequest)
+    public function update(Request $request, RecruitmentCandidate $recruitmentCandidate)
     {
         //
     }
@@ -75,10 +75,10 @@ class EmployeeLeaveRequestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EmployeeLeaveRequest  $employeeLeaveRequest
+     * @param  \App\Models\RecruitmentCandidate  $recruitmentCandidate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmployeeLeaveRequest $employeeLeaveRequest)
+    public function destroy(RecruitmentCandidate $recruitmentCandidate)
     {
         //
     }

@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EmployeeScore;
+use App\Models\Access;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class EmployeeScoreController extends Controller
+class ProfilesController extends Controller
 {
+    private $users;
+    private $accesses;
+
+    public function __construct()
+    {
+        $this->users = resolve(User::class);
+        $this->accesses = resolve(Access::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,9 @@ class EmployeeScoreController extends Controller
      */
     public function index()
     {
-        //
+        $accesses = $this->accesses->get(true);
+        $profile = $this->users->getProfile();
+        return view('pages.profile', compact('accesses','profile'));
     }
 
     /**
@@ -41,10 +52,10 @@ class EmployeeScoreController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EmployeeScore  $employeeScore
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(EmployeeScore $employeeScore)
+    public function show($id)
     {
         //
     }
@@ -52,10 +63,10 @@ class EmployeeScoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EmployeeScore  $employeeScore
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmployeeScore $employeeScore)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +75,10 @@ class EmployeeScoreController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EmployeeScore  $employeeScore
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmployeeScore $employeeScore)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +86,10 @@ class EmployeeScoreController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EmployeeScore  $employeeScore
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmployeeScore $employeeScore)
+    public function destroy($id)
     {
         //
     }

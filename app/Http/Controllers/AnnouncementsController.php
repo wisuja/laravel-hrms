@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Access;
+use App\Models\Announcement;
 use App\Models\Announcements;
 use Illuminate\Http\Request;
 
 class AnnouncementsController extends Controller
 {
+    private $announcements;
+    private $accesses;
+
+    public function __construct()
+    {
+        $this->announcements = resolve(Announcement::class);
+        $this->accesses = resolve(Access::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,9 @@ class AnnouncementsController extends Controller
      */
     public function index()
     {
-        //
+        $accesses = $this->accesses->get(true);
+        $announcements = $this->announcements->paginate();
+        return view('pages.announcements', compact('accesses','announcements'));
     }
 
     /**

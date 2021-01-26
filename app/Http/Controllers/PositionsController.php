@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RecruitmentCandidate;
+use App\Models\Access;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
-class RecruitmentCandidateController extends Controller
+class PositionsController extends Controller
 {
+    private $positions;
+    private $accesses;
+
+    public function __construct()
+    {
+        $this->positions = resolve(Position::class);
+        $this->accesses = resolve(Access::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,9 @@ class RecruitmentCandidateController extends Controller
      */
     public function index()
     {
-        //
+        $positions = $this->positions->get();
+        $accesses = $this->accesses->get(true);
+        return view('pages.positions-data', compact('accesses','positions'));
     }
 
     /**
@@ -41,10 +52,10 @@ class RecruitmentCandidateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RecruitmentCandidate  $recruitmentCandidate
+     * @param  \App\Models\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function show(RecruitmentCandidate $recruitmentCandidate)
+    public function show(Position $position)
     {
         //
     }
@@ -52,10 +63,10 @@ class RecruitmentCandidateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\RecruitmentCandidate  $recruitmentCandidate
+     * @param  \App\Models\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function edit(RecruitmentCandidate $recruitmentCandidate)
+    public function edit(Position $position)
     {
         //
     }
@@ -64,10 +75,10 @@ class RecruitmentCandidateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RecruitmentCandidate  $recruitmentCandidate
+     * @param  \App\Models\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecruitmentCandidate $recruitmentCandidate)
+    public function update(Request $request, Position $position)
     {
         //
     }
@@ -75,10 +86,10 @@ class RecruitmentCandidateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\RecruitmentCandidate  $recruitmentCandidate
+     * @param  \App\Models\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RecruitmentCandidate $recruitmentCandidate)
+    public function destroy(Position $position)
     {
         //
     }

@@ -3,22 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Access;
-use App\Models\Employee;
+use App\Models\Recruitment;
 use Illuminate\Http\Request;
 
-class EmployeesController extends Controller
+class RecruitmentsController extends Controller
 {
-    private $employees;
+    private $recruitments;
     private $accesses;
 
     public function __construct()
     {
-        $this->middleware('auth');  
-        
-        $this->employees = resolve(Employee::class);
+        $this->recruitments = resolve(Recruitment::class);
         $this->accesses = resolve(Access::class);
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,9 +23,9 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $employees = $this->employees->get();
         $accesses = $this->accesses->get(true);
-        return view('pages.employees-data', compact('accesses','employees'));
+        $recruitments = $this->recruitments->paginate();
+        return view('pages.recruitments', compact('accesses','recruitments'));
     }
 
     /**
@@ -55,10 +52,10 @@ class EmployeesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show(Recruitment $recruitment)
     {
         //
     }
@@ -66,10 +63,10 @@ class EmployeesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Recruitment $recruitment)
     {
         //
     }
@@ -78,10 +75,10 @@ class EmployeesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, Recruitment $recruitment)
     {
         //
     }
@@ -89,10 +86,10 @@ class EmployeesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Recruitment $recruitment)
     {
         //
     }
