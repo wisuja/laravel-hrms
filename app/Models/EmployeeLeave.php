@@ -11,7 +11,7 @@ class EmployeeLeave extends Model
 
     protected $guarded = [];
 
-    public function get($count = 10) {
-        
+    public function employee() {
+        return $this->belongsTo(Employee::class);
     }
 }

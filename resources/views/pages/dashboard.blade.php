@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['accesses' => $accesses, 'active' => 'dashboard'])
 
 @section('_content')
 <div class="container-fluid mt-2 px-4">
@@ -40,7 +40,7 @@
                   <tbody>
                     @foreach ($endingEmployees as $employee)
                     <tr>
-                      <th scope="row">{{ $loop->iteration }}</th>
+                      <th scope="row">{{ $loop->iteration + $endingEmployees->firstItem() - 1 }}</th>
                       <td>{{ $employee->name }}</td>
                       <td>{{ $employee->end_of_contract }}</td>
                       <td><a href="#" class="btn btn-outline-dark">Renew</a></td>
@@ -87,7 +87,7 @@
           <tbody>
             @foreach ($announcements as $announcement)
             <tr>
-              <th scope="row">{{ $loop->iteration }}</th>
+              <th scope="row">{{ $loop->iteration + $announcements->firstItem() - 1}}</th>
               <td><a href="#">{{ $announcement->title }}</a></td>
               <td>{{ $announcement->creator->name }}</td>
               <td>{{ $announcement->created_at }}</td>

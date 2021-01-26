@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'role_id' => function() {
-                return Role::where('name', 'User')->first()->id;
+                return Role::factory()->create()->id;
             },
             'remember_token' => Str::random(10),
         ];
@@ -42,7 +42,7 @@ class UserFactory extends Factory
                 'email' => 'admin@gmail.com',
                 'password' => '$2y$10$.l6nAxxUdU2gayAYkQW9T.6d/35KCHr.eX3qdN9OrVt5xjX/Skwwu',
                 'role_id' => function() {
-                    return Role::where('name', 'Administrator')->first()->id;
+                    return Role::factory()->create(['name' => 'Administrator'])->id;
                 }
             ];
         });

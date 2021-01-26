@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['accesses' => $accesses, 'active' => 'roles'])
 
 @section('_content')
 <div class="container-fluid mt-2 px-4">
@@ -27,7 +27,7 @@
           <tbody>
             @foreach ($roles as $role)
             <tr>
-              <th scope="row">{{ $loop->iteration }}</th>
+              <th scope="row">{{ $loop->iteration + $roles->firstItem() - 1 }}</th>
               <td class="w-25">{{ $role->name }}</td>
               <td>
                 <a href="#">Detail</a>

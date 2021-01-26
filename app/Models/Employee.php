@@ -29,15 +29,27 @@ class Employee extends Model
         return $this->hasOne(EmployeeDetail::class);
     }
 
+    public function employeeLeave() {
+        return $this->hasOne(EmployeeLeave::class);
+    }
+
+    public function employeeLeaveRequest() {
+        return $this->hasMany(EmployeeLeaveRequest::class);
+    }
+
     public function getCount() {
         return $this->count();
     }
 
     public function get($count = 10) {
-        return $this->latest()->with('department', 'position', 'headOfDepartment', 'employeeDetail')->paginate($count);
+        return $this->with('department', 'position', 'headOfDepartment')->latest()->paginate($count);
     }
 
     public function getEndingContractEmployees($count = 10) {
-        return $this->latest()->orderBy('end_of_contract', 'DESC')->paginate($count);
+        return $this->orderBy('end_of_contract', 'ASC')->paginate($count);
+    }
+
+    public function getEmployeeLeaveData($count = 10) {
+        return $this->with('employeeLeave', 'employeeLeaveRequest')->latest()->paginate($count);
     }
 }

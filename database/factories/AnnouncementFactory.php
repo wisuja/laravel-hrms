@@ -26,7 +26,7 @@ class AnnouncementFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'created_by' => function () {
-                return Employee::latest()->first()->id;
+                return Employee::factory()->create()->id;
             }
         ];
     }

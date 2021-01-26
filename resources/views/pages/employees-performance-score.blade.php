@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['accesses' => $accesses, 'active' => 'performance'])
 
 @section('_content')
 <div class="container-fluid mt-2 px-4">
@@ -29,7 +29,7 @@
           <tbody>
             @foreach ($employeeScores as $score)
             <tr>
-              <th scope="row">{{ $loop->iteration }}</th>
+              <th scope="row">{{ $loop->iteration + $employeeScores->firstItem() - 1 }}</th>
               <td>{{ $score->employee->name }}</td>
               <td><a href="#">Detail</a></td>
               <td>{{ $score->scoredBy->name }}</td>

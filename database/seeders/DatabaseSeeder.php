@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Announcement;
 use App\Models\Department;
 use App\Models\Employee;
+use App\Models\EmployeeDetail;
 use App\Models\Position;
 use App\Models\Recruitment;
 use App\Models\Role;
@@ -20,16 +21,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Role::factory()->admin()->create();
-        Role::factory()->user()->create();
+        $user = User::factory()->admin()->create();
+        $employee = Employee::factory()->create(['user_id' => $user->id, 'name' => $user->name]);
+        EmployeeDetail::factory()->create(['employee_id' => $employee->id, 'name' => $employee->name, 'email' => $user->email]);
 
-        User::factory()->admin()->create();
-
-        Department::factory()->create();
-        Position::factory()->create();
-        Employee::factory()->create();
-
-        Announcement::factory(10)->create();
-        Recruitment::factory(10)->create();
+        Announcement::factory(10)->create(['created_by' => $employee->id]);
+        Recruitment::factory(10)->create(['position_id' => $employee->position_id]);
     }
 }

@@ -16166,6 +16166,9 @@ html body .wrapper #sidebar {
   color: white;
   transition: all 0.3s;
 }
+html body .wrapper #sidebar .nav-active {
+  background: #6577bd;
+}
 html body .wrapper #sidebar i {
   width: 15px !important;
 }

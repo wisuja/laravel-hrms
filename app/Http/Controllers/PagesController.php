@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Access;
 use App\Models\Announcement;
 use App\Models\Attendance;
 use App\Models\Department;
 use App\Models\Employee;
+use App\Models\EmployeeLeave;
 use App\Models\EmployeeScore;
 use App\Models\Position;
 use App\Models\Recruitment;
@@ -20,12 +22,13 @@ class PagesController extends Controller
     private $employees;
     private $departments;
     private $positions;
+    private $employeeScores;
     private $recruitments;
     private $recruitmentCandidates;
-    private $employeeScores;
     private $attendances;
     private $users;
     private $roles;
+    private $accesses;
 
     public function __construct()
     {
@@ -35,12 +38,13 @@ class PagesController extends Controller
         $this->employees = resolve(Employee::class);
         $this->departments = resolve(Department::class);
         $this->positions = resolve(Position::class);
+        $this->employeeScores = resolve(EmployeeScore::class);
         $this->recruitments = resolve(Recruitment::class);
         $this->recruitmentCandidates = resolve(RecruitmentCandidate::class);
-        $this->employeeScores = resolve(EmployeeScore::class);
         $this->attendances = resolve(Attendance::class);
         $this->users = resolve(User::class);
         $this->roles = resolve(Role::class);
+        $this->accesses = resolve(Access::class);
     }
 
     public function index () {
@@ -50,64 +54,77 @@ class PagesController extends Controller
     }
 
     public function dashboard () {
+        $accesses = $this->accesses->get(true);
         $announcements = $this->announcements->paginate();
         $employeesCount = $this->employees->getCount();
         $recruitmentCandidatesCount = $this->recruitmentCandidates->getCount();
         $endingEmployees = $this->employees->getEndingContractEmployees();
-        return view('pages.dashboard', compact('announcements', 'employeesCount', 'recruitmentCandidatesCount', 'endingEmployees'));
+        return view('pages.dashboard', compact('accesses','announcements', 'employeesCount', 'recruitmentCandidatesCount', 'endingEmployees'));
     }
 
     public function employeesData () {
         $employees = $this->employees->get();
-        return view('pages.employees-data', compact('employees'));
+        $accesses = $this->accesses->get(true);
+        return view('pages.employees-data', compact('accesses','employees'));
     }
 
     public function departmentsData () {
         $departments = $this->departments->get();
-        return view('pages.departments-data', compact('departments'));
+        $accesses = $this->accesses->get(true);
+        return view('pages.departments-data', compact('accesses','departments'));
     }
 
     public function positionsData () {
         $positions = $this->positions->get();
-        return view('pages.positions-data', compact('positions'));
+        $accesses = $this->accesses->get(true);
+        return view('pages.positions-data', compact('accesses','positions'));
     }
 
     public function employeesPerformanceScore () {
+        $accesses = $this->accesses->get(true);
         $employeeScores = $this->employeeScores->getSimplifiedScores();
-        return view('pages.employees-performance-score', compact('employeeScores'));
+        return view('pages.employees-performance-score', compact('accesses','employeeScores'));
     }
 
     public function employeesLeave () {
-        return view('pages.employees-leave');
+        $accesses = $this->accesses->get(true);
+        $employeeLeaves = $this->employees->getEmployeeLeaveData();
+        return view('pages.employees-leave', compact('accesses','employeeLeaves'));
     }
 
     public function attendances () {
         $attendances = $this->attendances->get();
-        return view('pages.attendances', compact('attendances'));
+        $accesses = $this->accesses->get(true);
+        return view('pages.attendances', compact('accesses','attendances'));
     }
 
     public function announcements () {
+        $accesses = $this->accesses->get(true);
         $announcements = $this->announcements->paginate();
-        return view('pages.announcements', compact('announcements'));
+        return view('pages.announcements', compact('accesses','announcements'));
     }
 
     public function recruitments () {
+        $accesses = $this->accesses->get(true);
         $recruitments = $this->recruitments->paginate();
-        return view('pages.recruitments', compact('recruitments'));
+        return view('pages.recruitments', compact('accesses','recruitments'));
     }
 
     public function users () {
+        $accesses = $this->accesses->get(true);
         $users = $this->users->get();
-        return view('pages.users', compact('users'));
+        return view('pages.users', compact('accesses','users'));
     }
 
     public function roles () {
+        $accesses = $this->accesses->get(true);
         $roles = $this->roles->get();
-        return view('pages.roles', compact('roles'));
+        return view('pages.roles', compact('accesses','roles'));
     }
 
     public function profile () {
+        $accesses = $this->accesses->get(true);
         $profile = $this->users->getProfile();
-        return view('pages.profile', compact('profile'));
+        return view('pages.profile', compact('accesses','profile'));
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['accesses' => $accesses, 'active' => 'leave'])
 
 @section('_content')
 <div class="container-fluid mt-2 px-4">
@@ -24,23 +24,31 @@
               <th scope="col" class="table-dark">From</th>
               <th scope="col" class="table-dark">To</th>
               <th scope="col" class="table-dark">Message</th>
+              <th scope="col" class="table-dark">Status</th>
               <th scope="col" class="table-dark">Action</th>
             </tr>
           </thead>
           <tbody>
-            {{-- @foreach ($employees as $employee)
-            <tr>
-              <th scope="row">{{ $loop->iteration }}</th>
-              <td><a href="#">{{ $employee->name }}</a></td>
-              <td>{{ $employee->position->name }}</td>
-              <td>{{ $employee->department->name }}</td>
-              <td>{{ $employee->start_of_contract }}</td>
-              <td>{{ $employee->end_of_contract }}</td>
-            </tr>
-            @endforeach --}}
+            @foreach ($employeeLeaves as $leave)
+              @foreach ($leave->employeeLeaveRequest as $leaveReq)
+                <tr>
+                  <th scope="row">{{ $loop->iteration + $employeeLeaves->firstItem() - 1 }}</th>
+                  <td>{{ $leave->name }}</td>
+                  <td>{{ $leaveReq->from }}</td>
+                  <td>{{ $leaveReq->to }}</td>
+                  <td>{{ $leaveReq->message }}</td>
+                  <td>{{ $leaveReq->status }}</td>
+                  <td>
+                    <a href="#" class="btn btn-outline-primary">Accept</a>
+                    <a href="#" class="btn btn-outline-info">Detail</a>
+                    <a href="#" class="btn btn-outline-danger">Cancel</a>
+                  </td>
+                </tr>
+              @endforeach
+            @endforeach
           </tbody>
         </table>
-        {{-- {{ $employees->links() }}   --}}
+        {{ $employeeLeaves->links() }}  
       </div>
     </div>
   </div>

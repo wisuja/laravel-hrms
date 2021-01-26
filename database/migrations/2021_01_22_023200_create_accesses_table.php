@@ -19,6 +19,9 @@ class CreateAccessesTable extends Migration
             $table->unsignedBigInteger('menu_id');
             $table->integer('status');
             $table->timestamps();
+
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
         });
     }
 

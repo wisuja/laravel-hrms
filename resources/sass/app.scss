@@ -49,6 +49,10 @@ html {
                 color: white;
                 transition: all 0.3s;
 
+                .nav-active {
+                    background: #6577bd;
+                }
+
                 i {
                     width: 15px !important;
                 }

@@ -26,16 +26,16 @@ class EmployeeFactory extends Factory
     {
         return [
             'user_id' => function() {
-                return User::where('name', 'admin')->first()->id;
+                return User::factory()->create()->id;
             },
             'name' => $this->faker->name(),
             'start_of_contract' => $this->faker->date(),
             'end_of_contract' => $this->faker->date(),
             'department_id' => function() {
-                return Department::latest()->first()->id;
+                return Department::factory()->create()->id;
             },
             'position_id' => function() {
-                return Position::latest()->first()->id;
+                return Position::factory()->create()->id;
             }
         ];
     }

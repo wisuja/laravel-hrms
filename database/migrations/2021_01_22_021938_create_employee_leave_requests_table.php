@@ -21,12 +21,12 @@ class CreateEmployeeLeaveRequestsTable extends Migration
             $table->date('to');
             $table->string('status')->default('WAITING_FOR_APPROVAL');
             $table->string('comment')->nullable();
-            $table->unsignedBigInteger('approved_by')->nullable();
+            $table->unsignedBigInteger('checked_by')->nullable();
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
 
-            $table->foreign('approved_by')->references('id')->on('employees')->onDelete('set null');
+            $table->foreign('checked_by')->references('id')->on('employees')->onDelete('set null');
         });
     }
 
