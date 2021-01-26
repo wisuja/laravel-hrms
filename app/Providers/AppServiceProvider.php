@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Charts\AttendancesChart;
 use App\Charts\PerformanceChart;
+use App\Models\Access;
 use Illuminate\Support\ServiceProvider;
 use ConsoleTVs\Charts\Registrar as Charts;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,5 +35,10 @@ class AppServiceProvider extends ServiceProvider
             AttendancesChart::class,
             PerformanceChart::class
         ]);
+
+        View::composer('*', function($view) {
+            $accesses = resolve(Access::class)->get(true);
+            return $view->with('accesses', $accesses);
+        });
     }
 }

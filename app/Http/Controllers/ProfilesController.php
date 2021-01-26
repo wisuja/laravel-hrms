@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfilesController extends Controller
 {
     private $users;
-    private $accesses;
 
     public function __construct()
     {
         $this->users = resolve(User::class);
-        $this->accesses = resolve(Access::class);
     }
     /**
      * Display a listing of the resource.
@@ -23,9 +20,8 @@ class ProfilesController extends Controller
      */
     public function index()
     {
-        $accesses = $this->accesses->get(true);
         $profile = $this->users->getProfile();
-        return view('pages.profile', compact('accesses','profile'));
+        return view('pages.profile', compact('profile'));
     }
 
     /**

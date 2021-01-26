@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
 class DepartmentsController extends Controller
 {
     private $departments;
-    private $accesses;
 
     public function __construct()
     {
         $this->departments = resolve(Department::class);
-        $this->accesses = resolve(Access::class);
     }
     /**
      * Display a listing of the resource.
@@ -24,8 +21,7 @@ class DepartmentsController extends Controller
     public function index()
     {
         $departments = $this->departments->get();
-        $accesses = $this->accesses->get(true);
-        return view('pages.departments-data', compact('accesses','departments'));
+        return view('pages.departments-data', compact('departments'));
     }
 
     /**

@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
 use App\Models\Announcement;
-use App\Models\Announcements;
 use Illuminate\Http\Request;
 
 class AnnouncementsController extends Controller
 {
     private $announcements;
-    private $accesses;
 
     public function __construct()
     {
         $this->announcements = resolve(Announcement::class);
-        $this->accesses = resolve(Access::class);
     }
     /**
      * Display a listing of the resource.
@@ -24,9 +20,8 @@ class AnnouncementsController extends Controller
      */
     public function index()
     {
-        $accesses = $this->accesses->get(true);
         $announcements = $this->announcements->paginate();
-        return view('pages.announcements', compact('accesses','announcements'));
+        return view('pages.announcements', compact('announcements'));
     }
 
     /**
@@ -53,10 +48,10 @@ class AnnouncementsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Announcements  $announcements
+     * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function show(Announcements $announcements)
+    public function show(Announcement $announcement)
     {
         //
     }
@@ -64,10 +59,10 @@ class AnnouncementsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Announcements  $announcements
+     * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function edit(Announcements $announcements)
+    public function edit(Announcement $announcement)
     {
         //
     }
@@ -76,10 +71,10 @@ class AnnouncementsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Announcements  $announcements
+     * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Announcements $announcements)
+    public function update(Request $request, Announcement $announcement)
     {
         //
     }
@@ -87,10 +82,10 @@ class AnnouncementsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Announcements  $announcements
+     * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Announcements $announcements)
+    public function destroy(Announcement $announcement)
     {
         //
     }
