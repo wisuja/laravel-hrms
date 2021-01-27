@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head><base href="http://192.168.2.120:8000">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="BkOt7GNdT8LINoeL1c5ukdexDiVFDyttIxVmolYo">
+
+    <title>HRMS</title>
+
+    <!-- Scripts -->
+    <script src="http://192.168.2.120:8000/js/app.js" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="http://192.168.2.120:8000/css/app.css" rel="stylesheet">
+
+        </head>
+<body>
+    <div id="app">
+                <main class="py-4">
+            <div class="wrapper">
+    <nav id="sidebar" class="navbar-nav">
+  <div class="sidebar-header">
+    <a class="navbar-brand text-white" href="http://192.168.2.120:8000/dashboard">
+        <h3> HRMS</h3>
+    </a>
+  </div>
+  <ul class="list-unstyled components">
+      <div class="d-flex justify-content-center align-items-center my-3">
+          <img src="http://192.168.2.120:8000/images/profile.png" alt="profile-picture" class="rounded-circle w-50">
+      </div>
+      <div class="d-flex justify-content-center align-items-center ">
+          <h3>Hello, <b>admin</b>!</h3>
+      </div>
+
+       
+        <li class="nav-item ">
+          <a href="http://192.168.2.120:8000/dashboard" class="nav-link">
+  <i class="fas fa-tachometer-alt mr-2"></i>
+  Dashboard
+</a>        </li>
+       
+        <li class="nav-item ">
+          <a href="#dataSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+    <i class="fas fa-database mr-2"></i>
+    Data
+</a>
+<ul class="collapse list-unstyled" id="dataSubmenu">
+    <li class="nav-item">
+        <a href="http://192.168.2.120:8000/employees-data" class="nav-link">Employees</a>
+    </li>
+    <li class="nav-item">
+        <a href="http://192.168.2.120:8000/departments-data" class="nav-link">Departments</a>
+    </li>
+    <li class="nav-item">
+        <a href="http://192.168.2.120:8000/positions-data" class="nav-link">Positions</a>
+    </li>
+</ul>        </li>
+       
+        <li class="nav-item ">
+          <a href=http://192.168.2.120:8000/employees-performance-score class="nav-link">
+    <i class="fas fa-chart-line mr-2"></i>
+    Employees' Performance Score
+</a>        </li>
+       
+        <li class="nav-item ">
+          <a href=http://192.168.2.120:8000/employees-leave class="nav-link">
+  <i class="fas fa-walking mr-2"></i>
+  Employees' Leave
+</a>        </li>
+       
+        <li class="nav-item ">
+          <a href=http://192.168.2.120:8000/attendances class="nav-link">
+  <i class="fas fa-calendar-check mr-2"></i>
+  Attendance
+</a>        </li>
+       
+        <li class="nav-item ">
+          <a href=http://192.168.2.120:8000/announcements class="nav-link">
+  <i class="fas fa-bullhorn mr-2"></i>
+  Announcements
+</a>        </li>
+       
+        <li class="nav-item ">
+          <a href=http://192.168.2.120:8000/recruitments class="nav-link">                    
+  <i class="fas fa-briefcase mr-2"></i>
+  Recruitments
+</a>        </li>
+       
+        <li class="nav-item ">
+          <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+    <i class="fas fa-users mr-2"></i>
+    Accounts
+</a>
+<ul class="collapse list-unstyled" id="accountSubmenu">
+    <li class="nav-item">
+        <a href=http://192.168.2.120:8000/users class="nav-link">Users</a>
+    </li>
+    <li class="nav-item">
+        <a href=http://192.168.2.120:8000/roles class="nav-link">Roles</a>
+    </li>
+</ul>        </li>
+       
+        <li class="nav-item ">
+          <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">                    
+    <i class="fas fa-user-alt mr-2"></i>
+    admin
+</a>
+<ul class="collapse list-unstyled" id="userSubmenu">
+    <li class="nav-item">
+        <a href=http://192.168.2.120:8000/profile class="nav-link">Profile</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="http://192.168.2.120:8000/logout"
+            onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+            Logout
+        </a>
+
+        <form id="logout-form" action="http://192.168.2.120:8000/logout" method="POST" class="d-none">
+            <input type="hidden" name="_token" value="BkOt7GNdT8LINoeL1c5ukdexDiVFDyttIxVmolYo">        </form>
+    </li>
+</ul>        </li>
+        </ul>
+</nav>    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+      <button type="button" id="sidebarCollapse" class="btn btn-info toggleSidebarButton">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+  </div>
+</nav>
+        
+<div class="container-fluid mt-2 px-4">
+  <div class="row">
+    <div class="col-12">
+        <h4 class="font-weight-bold">Employees' Data</h4>
+        <hr>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12 mb-3">
+      <div class="bg-light text-dark card p-3 overflow-auto">
+                <table class="table table-light table-striped table-hover table-bordered text-center">
+          <thead>
+            <tr>
+              <th scope="col" class="table-dark">#</th>
+              <th scope="col" class="table-dark">Name</th>
+              <th scope="col" class="table-dark">Position</th>
+              <th scope="col" class="table-dark">Department</th>
+              <th scope="col" class="table-dark">Start of Contract</th>
+              <th scope="col" class="table-dark">End of Contract</th>
+            </tr>
+          </thead>
+          <tbody>
+                        <tr>
+              <th scope="row">1</th>
+              <td><a href="http://192.168.2.120:8000/employees-data/1">admin</a></td>
+              <td>quae</td>
+              <td>nulla</td>
+              <td>1998-01-12</td>
+              <td>1994-02-16</td>
+            </tr>
+                        <tr>
+              <th scope="row">2</th>
+              <td><a href="http://192.168.2.120:8000/employees-data/2">asdasd</a></td>
+              <td>quae</td>
+              <td>nulla</td>
+              <td>2021-01-14</td>
+              <td>2021-01-26</td>
+            </tr>
+                        <tr>
+              <th scope="row">3</th>
+              <td><a href="http://192.168.2.120:8000/employees-data/3">asdasd</a></td>
+              <td>quae</td>
+              <td>nulla</td>
+              <td>2021-01-14</td>
+              <td>2021-01-26</td>
+            </tr>
+                        <tr>
+              <th scope="row">4</th>
+              <td><a href="http://192.168.2.120:8000/employees-data/5">wisuja</a></td>
+              <td>quae</td>
+              <td>nulla</td>
+              <td>2021-01-08</td>
+              <td>2021-01-29</td>
+            </tr>
+                        <tr>
+              <th scope="row">5</th>
+              <td><a href="http://192.168.2.120:8000/employees-data/6">testkaryawan2</a></td>
+              <td>quas</td>
+              <td>nulla</td>
+              <td>2021-01-01</td>
+              <td>2021-01-31</td>
+            </tr>
+                      </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+</div>
+
+        </main>
+    </div>
+
+    </body>
+</html>

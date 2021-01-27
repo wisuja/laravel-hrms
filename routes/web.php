@@ -38,6 +38,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/employees-data', [EmployeesController::class, 'index'])->name('employees-data');
 Route::get('/employees-data/create', [EmployeesController::class, 'create'])->name('employees-data.create');
+Route::get('/employees-data/print', [EmployeesController::class, 'print'])->name('employees-data.print');
 Route::get('/employees-data/{employee}', [EmployeesController::class, 'show'])->name('employees-data.show');
 Route::get('/employees-data/{employee}/edit', [EmployeesController::class, 'edit'])->name('employees-data.edit');
 Route::post('/employees-data', [EmployeesController::class, 'store'])->name('employees-data.store');

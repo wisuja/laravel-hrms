@@ -12,6 +12,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PDF;
 
 class EmployeesController extends Controller
 {
@@ -180,5 +181,11 @@ class EmployeesController extends Controller
         User::where('id', $employee->user_id)->delete();
 
         return redirect()->route('employees-data')->with('status', 'Successfully deleted an employee.');
+    }
+
+    public function print() {
+        $employees = Employee::all();
+
+        return view('pages.employees-data_print', compact('employees'));
     }
 }
