@@ -22,6 +22,11 @@
               <span> Print</span>
           </a>
         </div>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <table class="table table-light table-striped table-hover table-bordered text-center">
           <thead>
             <tr>
@@ -37,7 +42,7 @@
             @foreach ($employees as $employee)
             <tr>
               <th scope="row">{{ $loop->iteration + $employees->firstItem() - 1 }}</th>
-              <td><a href="#">{{ $employee->name }}</a></td>
+              <td><a href="{{ route('employees-data.show', ['employee' => $employee->id]) }}">{{ $employee->name }}</a></td>
               <td>{{ $employee->position->name }}</td>
               <td>{{ $employee->department->name }}</td>
               <td>{{ $employee->start_of_contract }}</td>

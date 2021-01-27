@@ -11,6 +11,8 @@ class EmployeeScoresController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');  
+        
         $this->employeeScores = resolve(EmployeeScore::class);
     }
     /**

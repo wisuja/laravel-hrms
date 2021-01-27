@@ -24,7 +24,7 @@ class Attendance extends Model
         return $this->belongsTo(AttendanceType::class);
     }
 
-    public function get ($count = 10) {
+    public function paginate ($count = 10) {
         return $this->with('employee', 'attendanceTime', 'attendanceType')->latest()->paginate($count);
     }
 

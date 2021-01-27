@@ -11,6 +11,8 @@ class RecruitmentsController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');  
+        
         $this->recruitments = resolve(Recruitment::class);
     }
     /**

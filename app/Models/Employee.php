@@ -11,7 +11,7 @@ class Employee extends Model
 
     protected $guarded = [];
 
-    protected $with = ['employeeDetail'];
+    protected $with = ['employeeDetail', 'department', 'position', 'user'];
 
     public function department() {
         return $this->belongsTo(Department::class);
@@ -29,6 +29,10 @@ class Employee extends Model
         return $this->hasOne(EmployeeDetail::class);
     }
 
+    public function user () {
+        return $this->belongsTo(User::class);
+    }
+
     public function employeeLeave() {
         return $this->hasOne(EmployeeLeave::class);
     }
@@ -41,8 +45,8 @@ class Employee extends Model
         return $this->count();
     }
 
-    public function get($count = 10) {
-        return $this->with('department', 'position', 'headOfDepartment')->latest()->paginate($count);
+    public function paginate($count = 10) {
+        return $this->with('headOfDepartment')->latest()->paginate($count);
     }
 
     public function getEndingContractEmployees($count = 10) {

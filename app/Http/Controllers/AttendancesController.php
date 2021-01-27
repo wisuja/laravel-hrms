@@ -11,6 +11,8 @@ class AttendancesController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');  
+        
         $this->attendances = resolve(Attendance::class);
     }
 
@@ -21,7 +23,7 @@ class AttendancesController extends Controller
      */
     public function index()
     {
-        $attendances = $this->attendances->get();
+        $attendances = $this->attendances->paginate();
         return view('pages.attendances', compact('attendances'));
     }
 

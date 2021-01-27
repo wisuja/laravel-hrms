@@ -49,7 +49,7 @@ class User extends Authenticatable
         return $this->hasOne(Employee::class);
     }
 
-    public function get($count = 10) {
+    public function paginate($count = 10) {
         return $this->with('role')->latest()->paginate($count);
     }
 

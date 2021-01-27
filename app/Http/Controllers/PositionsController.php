@@ -11,6 +11,8 @@ class PositionsController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');  
+        
         $this->positions = resolve(Position::class);
     }
     /**
@@ -20,7 +22,7 @@ class PositionsController extends Controller
      */
     public function index()
     {
-        $positions = $this->positions->get();
+        $positions = $this->positions->paginate();
         return view('pages.positions-data', compact('positions'));
     }
 

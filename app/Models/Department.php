@@ -16,6 +16,10 @@ class Department extends Model
     }
 
     public function get($count = 10) {
+        return $this->latest()->take($count)->get();
+    }
+
+    public function paginate($count = 10) {
         return $this->latest()->paginate($count);
     }
 }

@@ -11,6 +11,8 @@ class UsersController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');  
+        
         $this->users = resolve(User::class);
     }
     /**
@@ -20,7 +22,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = $this->users->get();
+        $users = $this->users->paginate();
         return view('pages.users', compact('users'));
     }
 

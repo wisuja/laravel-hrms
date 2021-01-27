@@ -11,6 +11,8 @@ class RolesController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');  
+        
         $this->roles = resolve(Role::class);
     }
 
@@ -21,7 +23,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = $this->roles->get();
+        $roles = $this->roles->paginate();
         return view('pages.roles', compact('roles'));
     }
 

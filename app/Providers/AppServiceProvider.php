@@ -37,8 +37,10 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         View::composer('*', function($view) {
-            $accesses = resolve(Access::class)->get(true);
-            return $view->with('accesses', $accesses);
+            if(auth()->check()) {
+                $accesses = resolve(Access::class)->get(true);
+                return $view->with('accesses', $accesses);
+            }
         });
     }
 }

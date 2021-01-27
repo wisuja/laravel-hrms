@@ -27,7 +27,7 @@ class CreateEmployeeDetailsTable extends Migration
             $table->string('cv');
             $table->string('last_education');
             $table->string('gpa');
-            $table->integer('work_experience_in_year');
+            $table->integer('work_experience_in_years');
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');

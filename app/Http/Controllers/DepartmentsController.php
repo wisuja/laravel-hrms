@@ -11,6 +11,8 @@ class DepartmentsController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');  
+        
         $this->departments = resolve(Department::class);
     }
     /**
@@ -20,7 +22,7 @@ class DepartmentsController extends Controller
      */
     public function index()
     {
-        $departments = $this->departments->get();
+        $departments = $this->departments->paginate();
         return view('pages.departments-data', compact('departments'));
     }
 
