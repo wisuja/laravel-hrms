@@ -61,6 +61,13 @@ Route::post('/positions-data', [PositionsController::class, 'store'])->name('pos
 Route::put('/positions-data/{position}', [PositionsController::class, 'update'])->name('positions-data.update');
 Route::delete('/positions-data/{position}', [PositionsController::class, 'destroy'])->name('positions-data.destroy');
 Route::get('/employees-performance-score', [EmployeeScoresController::class, 'index'])->name('employees-performance-score');
+Route::get('/employees-performance-score/create', [EmployeeScoresController::class, 'create'])->name('employees-performance-score.create');
+Route::get('/employees-performance-score/print', [EmployeeScoresController::class, 'print'])->name('employees-performance-score.print');
+Route::get('/employees-performance-score/{employeeScore}', [EmployeeScoresController::class, 'show'])->name('employees-performance-score.show');
+Route::get('/employees-performance-score/{employeeScore}/edit', [EmployeeScoresController::class, 'edit'])->name('employees-performance-score.edit');
+Route::post('/employees-performance-score', [EmployeeScoresController::class, 'store'])->name('employees-performance-score.store');
+Route::put('/employees-performance-score/{employeeScore}', [EmployeeScoresController::class, 'update'])->name('employees-performance-score.update');
+Route::delete('/employees-performance-score/{employeeScore}', [EmployeeScoresController::class, 'destroy'])->name('employees-performance-score.destroy');
 Route::get('/employees-leave', [EmployeeLeavesController::class, 'index'])->name('employees-leave');
 Route::get('/attendances', [AttendancesController::class, 'index'])->name('attendances');
 Route::get('/announcements', [AnnouncementsController::class, 'index'])->name('announcements');

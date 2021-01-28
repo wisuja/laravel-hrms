@@ -25,7 +25,11 @@ class Attendance extends Model
     }
 
     public function paginate ($count = 10) {
-        return $this->with('employee', 'attendanceTime', 'attendanceType')->latest()->paginate($count);
+        if(auth()->user()->isAdmin()) {
+            return $this->with('employee', 'attendanceTime', 'attendanceType')->latest()->paginate($count);
+        } else {
+            return $this->with('employee', 'attendanceTime', 'attendanceType')->where('employee_id', auth()->user()->employee->id)->latest()->paginate($count);
+        }
     }
 
     public function getCreatedAtAttribute($value) {

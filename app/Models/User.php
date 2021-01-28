@@ -56,4 +56,8 @@ class User extends Authenticatable
     public function getProfile() {
         return $this->with('employee')->where('id', auth()->id())->first();
     }
+
+    public function isAdmin() {
+        return in_array($this->role_id, [1]);
+    }
 }
