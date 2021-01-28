@@ -15,6 +15,7 @@ class CreateEmployeeScoresTable extends Migration
     {
         Schema::create('employee_scores', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('group_id');
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('score_category_id')->nullable();
             $table->integer('score');
