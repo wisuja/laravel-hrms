@@ -21,8 +21,8 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="employee_id">Employee Name:</label>
-                  <select id="employee_id" class="form-control @error('employee_id') is-invalid @enderror" name="employee_id" required>
-                    <option value="">Choose...</option>
+                  <input type="hidden" name="employee_id" value="{{ $scores[0]->employee_id }}">
+                  <select id="employee_id" class="form-control" disabled>
                     @foreach ($employees as $employee)
                     <option value="{{ $employee->id }}" {{ $scores[0]->employee_id == $employee->id ? 'selected': '' }}>
                       {{ $employee->employeeDetail->name }}
