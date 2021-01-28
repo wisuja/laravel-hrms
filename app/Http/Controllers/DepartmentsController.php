@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDepartmentRequest;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.departments-data_create');
     }
 
     /**
@@ -42,9 +43,11 @@ class DepartmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDepartmentRequest $request)
     {
-        //
+        Department::create($request->validated());
+
+        return redirect()->route('departments-data')->with('status', 'Successfully created a department.');
     }
 
     /**
@@ -55,7 +58,7 @@ class DepartmentsController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        return view('pages.departments-data_show', compact('department'));
     }
 
     /**
@@ -66,7 +69,7 @@ class DepartmentsController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        return view('pages.departments-data_edit', compact('department'));
     }
 
     /**
@@ -76,9 +79,11 @@ class DepartmentsController extends Controller
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Department $department)
+    public function update(StoreDepartmentRequest $request, Department $department)
     {
-        //
+        Department::where('id', $department->id)->update($request->validated());
+
+        return redirect()->route('departments-data')->with('status', 'Successfully updated department.');
     }
 
     /**
@@ -89,6 +94,13 @@ class DepartmentsController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        Department::where('id', $department->id)->delete();
+
+        return redirect()->route('departments-data')->with('status', 'Successfully deleted department.');
+    }
+
+    public function print() {
+        $departments = Department::all();
+        return view('pages.departments-data_print', compact('departments'));
     }
 }
