@@ -53,6 +53,13 @@ Route::post('/departments-data', [DepartmentsController::class, 'store'])->name(
 Route::put('/departments-data/{department}', [DepartmentsController::class, 'update'])->name('departments-data.update');
 Route::delete('/departments-data/{department}', [DepartmentsController::class, 'destroy'])->name('departments-data.destroy');
 Route::get('/positions-data', [PositionsController::class, 'index'])->name('positions-data');
+Route::get('/positions-data/create', [PositionsController::class, 'create'])->name('positions-data.create');
+Route::get('/positions-data/print', [PositionsController::class, 'print'])->name('positions-data.print');
+Route::get('/positions-data/{position}', [PositionsController::class, 'show'])->name('positions-data.show');
+Route::get('/positions-data/{position}/edit', [PositionsController::class, 'edit'])->name('positions-data.edit');
+Route::post('/positions-data', [PositionsController::class, 'store'])->name('positions-data.store');
+Route::put('/positions-data/{position}', [PositionsController::class, 'update'])->name('positions-data.update');
+Route::delete('/positions-data/{position}', [PositionsController::class, 'destroy'])->name('positions-data.destroy');
 Route::get('/employees-performance-score', [EmployeeScoresController::class, 'index'])->name('employees-performance-score');
 Route::get('/employees-leave', [EmployeeLeavesController::class, 'index'])->name('employees-leave');
 Route::get('/attendances', [AttendancesController::class, 'index'])->name('attendances');

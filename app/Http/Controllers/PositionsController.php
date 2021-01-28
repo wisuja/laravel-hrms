@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePositionRequest;
 use App\Models\Position;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class PositionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.positions-data_create');
     }
 
     /**
@@ -42,9 +43,11 @@ class PositionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePositionRequest $request)
     {
-        //
+        Position::create($request->validated());
+
+        return redirect()->route('positions-data')->with('status', 'Successfully created a position.');
     }
 
     /**
@@ -55,7 +58,7 @@ class PositionsController extends Controller
      */
     public function show(Position $position)
     {
-        //
+        return view('pages.positions-data_show', compact('position'));
     }
 
     /**
@@ -66,7 +69,7 @@ class PositionsController extends Controller
      */
     public function edit(Position $position)
     {
-        //
+        return view('pages.positions-data_edit', compact('position'));
     }
 
     /**
@@ -76,9 +79,11 @@ class PositionsController extends Controller
      * @param  \App\Models\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Position $position)
+    public function update(StorePositionRequest $request, Position $position)
     {
-        //
+        Position::where('id', $position->id)->update($request->validated());
+
+        return redirect()->route('positions-data')->with('status', 'Successfully updated position.');
     }
 
     /**
@@ -89,6 +94,14 @@ class PositionsController extends Controller
      */
     public function destroy(Position $position)
     {
-        //
+        Position::where('id', $position->id)->delete();
+
+        return redirect()->route('positions-data')->with('status', 'Successfully deleted a position.');
+    }
+
+    public function print() {
+        $positions = Position::all();
+
+        return view('pages.positions-data_print', compact('positions'));
     }
 }

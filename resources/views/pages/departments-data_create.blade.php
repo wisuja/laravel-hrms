@@ -19,7 +19,7 @@
               <div class="col-sm-12 col-lg-6">
                 <div class="form-group">
                   <label for="name">Name:</label>
-                  <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Enter name" required>
+                  <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Enter department name" required>
                 </div>
                 @error('name')
                   <div class="alert alert-danger">{{ $message }}</div>
@@ -40,7 +40,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="Address">Address:</label>
-                  <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" placeholder="Enter address" required>
+                  <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" placeholder="Enter department address" required>
                 </div>
                 @error('address')
                   <div class="alert alert-danger">{{ $message }}</div>
