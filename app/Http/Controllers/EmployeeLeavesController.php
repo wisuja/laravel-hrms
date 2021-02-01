@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use App\Models\EmployeeLeave;
 use Illuminate\Http\Request;
 
 class EmployeeLeavesController extends Controller
 {
-    private $employees;
-
     public function __construct()
     {
-        $this->middleware('auth');  
-
-        $this->employees = resolve(Employee::class);
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -23,8 +18,7 @@ class EmployeeLeavesController extends Controller
      */
     public function index()
     {
-        $employeeLeaves = $this->employees->getEmployeeLeaveData();
-        return view('pages.employees-leave', compact('employeeLeaves'));
+        //
     }
 
     /**
@@ -45,7 +39,7 @@ class EmployeeLeavesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       //
     }
 
     /**

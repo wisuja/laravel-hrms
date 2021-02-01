@@ -29,6 +29,10 @@ class Employee extends Model
         return $this->hasOne(EmployeeDetail::class);
     }
 
+    public function checkedBy () {
+
+    }
+
     public function user () {
         return $this->belongsTo(User::class);
     }

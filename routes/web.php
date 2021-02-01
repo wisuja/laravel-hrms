@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AttendancesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\EmployeeLeaveRequestsController;
 use App\Http\Controllers\EmployeeLeavesController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\EmployeeScoresController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\RecruitmentsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,7 +70,14 @@ Route::get('/employees-performance-score/{employeeScore}/edit', [EmployeeScoresC
 Route::post('/employees-performance-score', [EmployeeScoresController::class, 'store'])->name('employees-performance-score.store');
 Route::put('/employees-performance-score/{employeeScore}', [EmployeeScoresController::class, 'update'])->name('employees-performance-score.update');
 Route::delete('/employees-performance-score/{employeeScore}', [EmployeeScoresController::class, 'destroy'])->name('employees-performance-score.destroy');
-Route::get('/employees-leave', [EmployeeLeavesController::class, 'index'])->name('employees-leave');
+Route::get('/employees-leave-request', [EmployeeLeaveRequestsController::class, 'index'])->name('employees-leave-request');
+Route::get('/employees-leave-request/create', [EmployeeLeaveRequestsController::class, 'create'])->name('employees-leave-request.create');
+Route::get('/employees-leave-request/print', [EmployeeLeaveRequestsController::class, 'print'])->name('employees-leave-request.print');
+Route::get('/employees-leave-request/{employeeLeaveRequest}', [EmployeeLeaveRequestsController::class, 'show'])->name('employees-leave-request.show');
+Route::get('/employees-leave-request/{employeeLeaveRequest}/edit', [EmployeeLeaveRequestsController::class, 'edit'])->name('employees-leave-request.edit');
+Route::post('/employees-leave-request', [EmployeeLeaveRequestsController::class, 'store'])->name('employees-leave-request.store');
+Route::put('/employees-leave-request/{employeeLeaveRequest}', [EmployeeLeaveRequestsController::class, 'update'])->name('employees-leave-request.update');
+Route::delete('/employees-leave-request/{employeeLeaveRequest}', [EmployeeLeaveRequestsController::class, 'destroy'])->name('employees-leave-request.destroy');
 Route::get('/attendances', [AttendancesController::class, 'index'])->name('attendances');
 Route::get('/announcements', [AnnouncementsController::class, 'index'])->name('announcements');
 Route::get('/recruitments', [RecruitmentsController::class, 'index'])->name('recruitments');
