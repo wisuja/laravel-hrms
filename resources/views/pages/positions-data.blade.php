@@ -14,7 +14,7 @@
       <div class="bg-light text-dark card p-3 overflow-auto">
         <div class="d-flex justify-content-between">
           <a href="{{ route('positions-data.create') }}" class="btn btn-outline-dark mb-3 w-25">
-            <i class="fas fa-print mr-1"></i>
+            <i class="fas fa-plus mr-1"></i>
               <span> Create</span>
           </a>
           <a href="{{ route('positions-data.print') }}" class="btn btn-outline-dark mb-3 w-25" target="_blank">
