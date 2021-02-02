@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AttendanceType extends Model
 {
     use HasFactory;
+
+    public function get() {
+        return $this->latest()->get();
+    }
 }

@@ -140,6 +140,7 @@ class EmployeesController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'role_id' => $request->input('role_id'),
+            'is_active' => $request->input('is_active'),
         ]);
 
         Employee::where('id', $employee->id)
@@ -149,6 +150,7 @@ class EmployeesController extends Controller
                     'end_of_contract' => $request->input('end_of_contract'),
                     'department_id' => $request->input('department_id'),
                     'position_id' => $request->input('position_id'),
+                    'is_active' => $request->input('is_active'),
                 ]);
 
         EmployeeDetail::where('employee_id', $employee->id)

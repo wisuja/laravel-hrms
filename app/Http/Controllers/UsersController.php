@@ -91,4 +91,10 @@ class UsersController extends Controller
     {
         //
     }
+
+    public function print()
+    {
+        $users = User::with('role')->latest()->get();
+        return view('pages.users_print', compact('users'));
+    }
 }

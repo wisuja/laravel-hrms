@@ -18,7 +18,7 @@ class CreateAnnouncementsTable extends Migration
             $table->unsignedBigInteger('department_id')->nullable();
             $table->string('title');
             $table->text('description');
-            $table->string('attachments')->nullable();
+            $table->string('attachment')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
 
