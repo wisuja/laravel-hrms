@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['accesses' => $accesses, 'active' => 'leave'])
+@extends('layouts.admin', ['accesses' => $accesses, 'active' => 'leave-request'])
 
 @section('_content')
 <div class="container-fluid mt-2 px-4">

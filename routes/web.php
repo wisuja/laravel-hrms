@@ -13,6 +13,7 @@ use App\Http\Controllers\PositionsController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\RecruitmentsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\ScoreCategoriesController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,16 +29,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Auth::routes([
     'register' => false,
     'verify' => false,
     'reset' => false
 ]);
 
-
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('check.access');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/employees-data', [EmployeesController::class, 'index'])->name('employees-data');
 Route::get('/employees-data/create', [EmployeesController::class, 'create'])->name('employees-data.create');
 Route::get('/employees-data/print', [EmployeesController::class, 'print'])->name('employees-data.print');
@@ -97,6 +96,13 @@ Route::get('/recruitments/{recruitment}/edit', [RecruitmentsController::class, '
 Route::post('/recruitments', [RecruitmentsController::class, 'store'])->name('recruitments.store');
 Route::put('/recruitments/{recruitment}', [RecruitmentsController::class, 'update'])->name('recruitments.update');
 Route::delete('/recruitments/{recruitment}', [RecruitmentsController::class, 'destroy'])->name('recruitments.destroy');
+Route::get('/score-categories', [ScoreCategoriesController::class, 'index'])->name('score-categories');
+Route::get('/score-categories/create', [ScoreCategoriesController::class, 'create'])->name('score-categories.create');
+Route::get('/score-categories/print', [ScoreCategoriesController::class, 'print'])->name('score-categories.print');
+Route::get('/score-categories/{scoreCategory}/edit', [ScoreCategoriesController::class, 'edit'])->name('score-categories.edit');
+Route::post('/score-categories', [ScoreCategoriesController::class, 'store'])->name('score-categories.store');
+Route::put('/score-categories/{scoreCategory}', [ScoreCategoriesController::class, 'update'])->name('score-categories.update');
+Route::delete('/score-categories/{scoreCategory}', [ScoreCategoriesController::class, 'destroy'])->name('score-categories.destroy');
 Route::get('/users', [UsersController::class, 'index'])->name('users');
 Route::get('/users/print', [UsersController::class, 'print'])->name('users.print');
 Route::get('/roles', [RolesController::class, 'index'])->name('roles');

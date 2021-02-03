@@ -36,8 +36,8 @@ class EmployeeDetailFactory extends Factory
             'photo' => 'profile-picture.jpg',
             'cv' => 'cv.jpg',
             'last_education' => 'SMA',
-            'gpa' => 3.51,
-            'work_experience_in_year' => 0
+            'gpa' => 4.0,
+            'work_experience_in_years' => 0
         ];
     }
 }
