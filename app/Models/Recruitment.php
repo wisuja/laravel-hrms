@@ -15,6 +15,11 @@ class Recruitment extends Model
         return $this->belongsTo(Position::class);
     }
 
+    public function recruitmentCanditate() 
+    {
+        return $this->hasMany(RecruitmentCandidate::class);
+    }
+
     public function get($count = 3) {
         return $this->latest()->take($count)->get();
     }

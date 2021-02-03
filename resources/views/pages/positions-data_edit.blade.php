@@ -62,7 +62,7 @@
               <div class="col-12">
                 <div class="form-check">
                   <input type="hidden" name="open_for_recruitment" value="0">
-                  <input type="checkbox" class="form-check-input @error('open_for_recruitment') is-invalid @enderror" id="open_for_recruitment" name="open_for_recruitment" value="1"  {{ old('open_for_recruitment', isset($position->open_for_recruitment) ? 'checked' : '') }}>
+                  <input type="checkbox" class="form-check-input @error('open_for_recruitment') is-invalid @enderror" id="open_for_recruitment" name="open_for_recruitment" value="1"  {{ $position->open_for_recruitment ? 'checked' : '' }}>
                   <label class="form-check-label" for="open_for_recruitment">Open for Recruitment</label>
                 </div>
                 @error('open_for_recruitment')

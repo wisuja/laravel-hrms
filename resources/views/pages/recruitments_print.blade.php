@@ -1,9 +1,9 @@
-@extends('layouts.admin', ['accesses' => $accesses, 'active' => 'recruitments'])
+@extends('layouts.print')
 
 @section('_content')
 <div class="container-fluid mt-2 px-4">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 text-center">
         <h4 class="font-weight-bold">Recruitments</h4>
         <hr>
     </div>
@@ -12,23 +12,6 @@
   <div class="row">
     <div class="col-12 mb-3">
       <div class="bg-light text-dark card p-3 overflow-auto">
-        <div class="d-flex justify-content-between">
-          <a href="{{ route('recruitments.create') }}" class="btn btn-outline-dark mb-3 w-25">
-            <i class="fas fa-plus mr-1"></i>
-              <span> Create</span>
-          </a>
-          <a href="{{ route('recruitments.print') }}" class="btn btn-outline-dark mb-3 w-25" target="_blank">
-            <i class="fas fa-print mr-1"></i>
-              <span> Print</span>
-          </a>
-        </div>
-
-        @if (session('status'))
-          <div class="alert alert-success">
-            {{ session('status') }}
-          </div>
-        @endif
-
         <table class="table table-light table-striped table-hover table-bordered text-center">
           <thead>
             <tr>
@@ -42,10 +25,10 @@
           <tbody>
             @foreach ($recruitments as $recruitment)
             <tr>
-              <th scope="row">{{ $loop->iteration + $recruitments->firstItem() - 1 }}</th>
-              <td class="w-25"><a href="{{ route('recruitments.show', ['recruitment' => $recruitment->id ]) }}">{{ $recruitment->title }}</a></td>
+              <th scope="row">{{ $loop->iteration }}</th>
+              <td class="w-25">{{ $recruitment->title }}</td>
               <td class="w-25">{{ $recruitment->description }}</td>
-              <td><a href="{{ asset('/storage/' . $recruitment->attachment) }}" target="_blank">View</a></td>
+              <td><a href="#">{{ $recruitment->attachment }}</a></td>
               <td>
                 <input type="checkbox" name="open_for_recruitment" disabled
                 @if ($recruitment->is_active )
@@ -56,9 +39,16 @@
             @endforeach
           </tbody>
         </table>
-        {{ $recruitments->links() }}  
       </div>
     </div>
   </div>
 </div>
+@endsection
+
+@section('_script')
+    <script>
+      window.onload = function () {
+        window.print();
+      }
+    </script>
 @endsection

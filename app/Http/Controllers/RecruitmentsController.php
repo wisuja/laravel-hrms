@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRecruitmentRequest;
+use App\Models\Position;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
 
@@ -33,7 +35,8 @@ class RecruitmentsController extends Controller
      */
     public function create()
     {
-        //
+        $positions = Position::where('open_for_recruitment', 1)->latest()->get();
+        return view('pages.recruitments_create', compact('positions'));
     }
 
     /**
@@ -42,9 +45,21 @@ class RecruitmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRecruitmentRequest $request)
     {
-        //
+        $createArray = [
+            'position_id' => $request->input('position_id'),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+        ];
+
+        if($request->has('attachment') && $request->attachment !== null) {
+            $createArray["attachment"] = $request->file('attachment')->store('attachments', 'public');
+        }
+
+        $this->recruitments->create($createArray);
+
+        return redirect()->route('recruitments')->with('status', 'Successfully created a recruitment.');
     }
 
     /**
@@ -55,7 +70,8 @@ class RecruitmentsController extends Controller
      */
     public function show(Recruitment $recruitment)
     {
-        //
+        $recruitmentCandidates = $recruitment->recruitmentCanditate()->paginate(10);
+        return view('pages.recruitments_show', compact('recruitment', 'recruitmentCandidates'));
     }
 
     /**
@@ -66,7 +82,8 @@ class RecruitmentsController extends Controller
      */
     public function edit(Recruitment $recruitment)
     {
-        //
+        $positions = Position::where('open_for_recruitment', 1)->latest()->get();
+        return view('pages.recruitments_edit', compact('recruitment', 'positions'));
     }
 
     /**
@@ -76,9 +93,22 @@ class RecruitmentsController extends Controller
      * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recruitment $recruitment)
+    public function update(StoreRecruitmentRequest $request, Recruitment $recruitment)
     {
-        //
+        $updateArray = [
+            'position_id' => $request->input('position_id'),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'is_active' => $request->input('is_active')
+        ];
+
+        if($request->has('attachment') && $request->attachment !== null) {
+            $updateArray["attachment"] = $request->file('attachment')->store('attachments', 'public');
+        }
+
+        $this->recruitments->whereId($recruitment->id)->update($updateArray);
+
+        return redirect()->route('recruitments')->with('status', 'Successfully updated recruitment.');
     }
 
     /**
@@ -89,6 +119,14 @@ class RecruitmentsController extends Controller
      */
     public function destroy(Recruitment $recruitment)
     {
-        //
+        $this->recruitments->whereId($recruitment->id)->delete();
+
+        return redirect()->route('recruitments')->with('status', 'Successfully deleted recruitment.');
+    }
+
+    public function print () 
+    {
+        $recruitments = $this->recruitments->all();
+        return view('pages.recruitments_print', compact('recruitments'));
     }
 }

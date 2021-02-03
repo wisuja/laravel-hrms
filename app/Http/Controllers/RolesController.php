@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRoleRequest;
+use App\Models\Access;
+use App\Models\Menu;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -34,7 +37,8 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        $menus = Menu::all();
+        return view('pages.roles_create', compact('menus'));
     }
 
     /**
@@ -43,9 +47,20 @@ class RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRoleRequest $request)
     {
-        //
+        $roleId = Role::create(['name' => $request->input('name')])->id;
+
+        foreach($request->menuAndAccessLevel as $mna) {
+            $key = key($mna);
+            Access::create([
+                'role_id' => $roleId,
+                'menu_id' => $key,
+                'status' => $mna[$key]
+            ]);
+        }
+
+        return redirect()->route('roles')->with('status', 'Successfully created a role.');
     }
 
     /**
@@ -56,7 +71,8 @@ class RolesController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        $accessesForEditing = Access::where('role_id', $role->id)->with('menu', 'role')->orderBy('menu_id', 'ASC')->get();
+        return view('pages.roles_show', compact('accessesForEditing', 'role'));
     }
 
     /**
@@ -67,7 +83,9 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $accessesForEditing = Access::where('role_id', $role->id)->with('menu', 'role')->orderBy('menu_id', 'ASC')->get();
+
+        return view('pages.roles_edit', compact('accessesForEditing', 'role'));
     }
 
     /**
@@ -77,9 +95,21 @@ class RolesController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(StoreRoleRequest $request, Role $role)
     {
-        //
+        $role->update(['name' => $request->input('name')]);
+
+        foreach($request->menuAndAccessLevel as $mna) {
+            $key = key($mna);
+            Access::where([
+                ['role_id', '=', $role->id],
+                ['menu_id', '=', $key],
+            ])->update([
+                'status' => $mna[$key]
+            ]);
+        }
+
+        return redirect()->route('roles')->with('status', 'Successfully updated role.');
     }
 
     /**
@@ -90,6 +120,14 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $this->roles->where('id', $role->id)->delete();
+
+        return redirect()->route('roles')->with('status', 'Successfully deleted role.');
+    }
+
+    public function print ()
+    {
+        $roles = $this->roles->all();
+        return view('pages.roles_print', compact('roles'));
     }
 }

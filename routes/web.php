@@ -37,7 +37,7 @@ Auth::routes([
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('check.access');
 Route::get('/employees-data', [EmployeesController::class, 'index'])->name('employees-data');
 Route::get('/employees-data/create', [EmployeesController::class, 'create'])->name('employees-data.create');
 Route::get('/employees-data/print', [EmployeesController::class, 'print'])->name('employees-data.print');
@@ -90,8 +90,22 @@ Route::post('/announcements', [AnnouncementsController::class, 'store'])->name('
 Route::put('/announcements/{announcement}', [AnnouncementsController::class, 'update'])->name('announcements.update');
 Route::delete('/announcements/{announcement}', [AnnouncementsController::class, 'destroy'])->name('announcements.destroy');
 Route::get('/recruitments', [RecruitmentsController::class, 'index'])->name('recruitments');
+Route::get('/recruitments/create', [RecruitmentsController::class, 'create'])->name('recruitments.create');
+Route::get('/recruitments/print', [RecruitmentsController::class, 'print'])->name('recruitments.print');
+Route::get('/recruitments/{recruitment}', [RecruitmentsController::class, 'show'])->name('recruitments.show');
+Route::get('/recruitments/{recruitment}/edit', [RecruitmentsController::class, 'edit'])->name('recruitments.edit');
+Route::post('/recruitments', [RecruitmentsController::class, 'store'])->name('recruitments.store');
+Route::put('/recruitments/{recruitment}', [RecruitmentsController::class, 'update'])->name('recruitments.update');
+Route::delete('/recruitments/{recruitment}', [RecruitmentsController::class, 'destroy'])->name('recruitments.destroy');
 Route::get('/users', [UsersController::class, 'index'])->name('users');
 Route::get('/users/print', [UsersController::class, 'print'])->name('users.print');
 Route::get('/roles', [RolesController::class, 'index'])->name('roles');
+Route::get('/roles/create', [RolesController::class, 'create'])->name('roles.create');
+Route::get('/roles/print', [RolesController::class, 'print'])->name('roles.print');
+Route::get('/roles/{role}', [RolesController::class, 'show'])->name('roles.show');
+Route::get('/roles/{role}/edit', [RolesController::class, 'edit'])->name('roles.edit');
+Route::post('/roles', [RolesController::class, 'store'])->name('roles.store');
+Route::put('/roles/{role}', [RolesController::class, 'update'])->name('roles.update');
+Route::delete('/roles/{role}', [RolesController::class, 'destroy'])->name('roles.destroy');
 Route::get('/profile', [ProfilesController::class, 'index'])->name('profile');
 Route::put('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');

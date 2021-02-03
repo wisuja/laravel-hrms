@@ -21,7 +21,7 @@ class Access extends Model
     }
 
     public function get($only_active_menu = false) {
-        $accesses = $this->with('menu', 'role')->latest()->get();
+        $accesses = $this->with('menu', 'role')->orderBy('menu_id', 'ASC')->get();
 
         $menus = $this->sortMenus($accesses, $only_active_menu);
 

@@ -88,7 +88,7 @@
             @foreach ($announcements as $announcement)
             <tr>
               <th scope="row">{{ $loop->iteration + $announcements->firstItem() - 1}}</th>
-              <td><a href="#">{{ $announcement->title }}</a></td>
+              <td><a href="{{ route('announcements.show', ['announcement' => $announcement->id ]) }}">{{ $announcement->title }}</a></td>
               <td>{{ $announcement->creator->name }}</td>
               <td>{{ $announcement->created_at }}</td>
             </tr>
