@@ -47,7 +47,7 @@ class EmployeeLeaveRequestsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEmployeeRequest $request)
+    public function store(StoreEmployeeLeaveRequest $request)
     {
         $this->employeeLeaveRequests->create([
             'employee_id' => $request->input('employee_id'),

@@ -43,7 +43,7 @@
                       <th scope="row">{{ $loop->iteration + $endingEmployees->firstItem() - 1 }}</th>
                       <td>{{ $employee->name }}</td>
                       <td>{{ $employee->end_of_contract }}</td>
-                      <td><a href="#" class="btn btn-outline-dark">Renew</a></td>
+                      <td><a href="{{ route('employees-data.edit', ['employee' => $employee->id ]) }}" class="btn btn-outline-dark">Renew</a></td>
                     </tr>
                     @endforeach
                   </tbody>

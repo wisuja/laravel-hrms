@@ -145,7 +145,7 @@
                 <div class="form-group">
                   <label for="gender">Gender:</label>
                   <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" required>
-                    <option selected>Choose...</option>
+                    <option selected value="">Choose...</option>
                     <option value="M">Male</option>
                     <option value="F" >Female</option>
                   </select>

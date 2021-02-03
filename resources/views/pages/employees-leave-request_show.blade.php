@@ -70,7 +70,7 @@
               <div class="col-sm-12 col-lg-6">
                 <div class="form-group">
                   <label for="checked_by">Checked By:</label>
-                  <input type="text" name="checked_by" id="checked_by" class="form-control-plaintext" readonly value="{{ $employeeLeaveRequest->checkedBy->name }}">
+                  <input type="text" name="checked_by" id="checked_by" class="form-control-plaintext" readonly value="{{ isset($employeeLeaveRequest->checkedBy) ? $employeeLeaveRequest->checkedBy->name : ''   }}">
                 </div>
               </div>
               <div class="col-sm-12 col-lg-6">
