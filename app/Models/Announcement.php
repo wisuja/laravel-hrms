@@ -21,7 +21,7 @@ class Announcement extends Model
     }
 
     public function get($count = 3) {
-        return $this->latest()->take($count)->get();
+        return $this->where('department_id', null)->latest()->take($count)->get();
     }
 
     public function paginate($count = 10) {

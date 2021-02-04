@@ -23,4 +23,15 @@ class WelcomeController extends Controller
         $recruitments = $this->recruitments->get();
         return view('pages.welcome', compact('announcements', 'recruitments'));
     }
+
+    public function announcements () 
+    {
+        $announcements = $this->announcements->where('department_id', null)->latest()->paginate(10);
+        return view('pages.welcome_announcements', compact('announcements'));
+    }
+
+    public function announcementShow (Announcement $announcement) 
+    {
+        return view('pages.welcome_announcements_show', compact('announcement'));
+    }
 }

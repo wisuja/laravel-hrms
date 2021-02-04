@@ -20,8 +20,8 @@ class Recruitment extends Model
         return $this->hasMany(RecruitmentCandidate::class);
     }
 
-    public function get($count = 3) {
-        return $this->latest()->take($count)->get();
+    public function get() {
+        return $this->where('is_active', 1)->latest()->take(3)->get();
     }
 
     public function paginate($count = 10) {

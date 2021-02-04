@@ -36,6 +36,8 @@ Auth::routes([
 ]);
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome')->middleware('guest');
+Route::get('/welcome/announcements', [WelcomeController::class, 'announcements'])->name('welcome.announcements')->middleware('guest');
+Route::get('/welcome/announcements/{announcement}', [WelcomeController::class, 'announcementShow'])->name('welcome.announcements.show')->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/employees-data', [EmployeesController::class, 'index'])->name('employees-data');
 Route::get('/employees-data/create', [EmployeesController::class, 'create'])->name('employees-data.create');

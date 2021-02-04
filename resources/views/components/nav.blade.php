@@ -11,10 +11,10 @@
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a href="#announcements" class="nav-link">Announcements</a>
+                <a href="{{ url('/#announcements') }}" class="nav-link">Announcements</a>
             </li>
             <li class="nav-item">
-                <a href="#recruitments" class="nav-link">Recruitments</a>
+                <a href="{{ url('/#recruitments') }}" class="nav-link">Recruitments</a>
             </li>
           </ul>
 
