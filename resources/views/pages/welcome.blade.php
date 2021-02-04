@@ -81,7 +81,7 @@
         </div>
         <div class="row mt-2 float-right mr-1">
             <div class="col-12">
-                <a href="#" class="btn btn-primary">See older job vacancies</a>
+                <a href="{{ route('welcome.recruitments') }}" class="btn btn-primary">See older job vacancies</a>
             </div>
         </div>
     @endif

@@ -34,4 +34,10 @@ class WelcomeController extends Controller
     {
         return view('pages.welcome_announcements_show', compact('announcement'));
     }
+
+    public function recruitments () 
+    {
+        $recruitments = $this->recruitments->where('is_active', 1)->latest()->paginate(10);
+        return view('pages.welcome_recruitments', compact('recruitments'));
+    }
 }
