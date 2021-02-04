@@ -100,17 +100,19 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12">
-      <form action="{{ route('recruitments.edit', ['recruitment' => $recruitment->id]) }}" class="d-inline-block">
-        <button type="submit" class="btn btn-warning mr-2 px-5">Edit</button>
-      </form>
-      <form action="{{ route('recruitments.destroy', ['recruitment' => $recruitment->id]) }}" method="POST" class="d-inline-block">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger mr-2 px-5" onclick="return confirm('Are you sure deleting this recruitment?')">Delete</button>
-      </form>
+  @if (collect($accesses)->where('menu_id', 7)->first()->status == 2 && auth()->user()->isAdmin())
+    <div class="row">
+      <div class="col-12">
+        <form action="{{ route('recruitments.edit', ['recruitment' => $recruitment->id]) }}" class="d-inline-block">
+          <button type="submit" class="btn btn-warning mr-2 px-5">Edit</button>
+        </form>
+        <form action="{{ route('recruitments.destroy', ['recruitment' => $recruitment->id]) }}" method="POST" class="d-inline-block">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger mr-2 px-5" onclick="return confirm('Are you sure deleting this recruitment?')">Delete</button>
+        </form>
+      </div>
     </div>
-  </div>
+  @endif
 </div>
 @endsection

@@ -13,9 +13,11 @@
       </div>
 
       @foreach ($accesses as $access) 
-        <li class="nav-item {{ ($active == $access->menu->name) ? 'nav-active' : '' }}">
-          @include('components.nav.' . $access->menu->name)
-        </li>
+        @if ($access->status > 0)
+          <li class="nav-item {{ ($active == $access->menu->name) ? 'nav-active' : '' }}">
+            @include('components.nav.' . $access->menu->name)
+          </li>
+        @endif
       @endforeach
   </ul>
 </nav>

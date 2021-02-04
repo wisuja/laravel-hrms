@@ -55,18 +55,24 @@
         </div>
     </div>
 
-    <div class="row">
-      <div class="col-12">
-        <form action="{{ route('announcements.edit', ['announcement' => $announcement->id]) }}" class="d-inline-block">
-          <button type="submit" class="btn btn-warning mr-2 px-5">Edit</button>
-        </form>
-        <form action="{{ route('announcements.destroy', ['announcement' => $announcement->id]) }}" method="POST" class="d-inline-block">
-          @csrf
-          @method('DELETE')
-          <button type="submit" class="btn btn-danger mr-2 px-5" onclick="return confirm('Are you sure deleting this announcement?')">Delete</button>
-        </form>
-      </div>
+      @if (collect($accesses)->where('menu_id', 6)->first()->status == 2)
+        <div class="row">
+          <div class="col-12">
+            @if ($announcement->created_by == auth()->user()->employee->id)
+              <form action="{{ route('announcements.edit', ['announcement' => $announcement->id]) }}" class="d-inline-block">
+                <button type="submit" class="btn btn-warning mr-2 px-5">Edit</button>
+              </form>
+            @endif
+            @if ($announcement->created_by == auth()->user()->employee->id || auth()->user()->isAdmin())             
+              <form action="{{ route('announcements.destroy', ['announcement' => $announcement->id]) }}" method="POST" class="d-inline-block">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger mr-2 px-5" onclick="return confirm('Are you sure deleting this announcement?')">Delete</button>
+              </form>
+            @endif
+          </div>
+        </div>
+      @endif
     </div>
-  </div>
 </div>
 @endsection

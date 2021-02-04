@@ -35,7 +35,7 @@ Auth::routes([
     'reset' => false
 ]);
 
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome')->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/employees-data', [EmployeesController::class, 'index'])->name('employees-data');
 Route::get('/employees-data/create', [EmployeesController::class, 'create'])->name('employees-data.create');
@@ -79,6 +79,7 @@ Route::put('/employees-leave-request/{employeeLeaveRequest}', [EmployeeLeaveRequ
 Route::delete('/employees-leave-request/{employeeLeaveRequest}', [EmployeeLeaveRequestsController::class, 'destroy'])->name('employees-leave-request.destroy');
 Route::get('/attendances', [AttendancesController::class, 'index'])->name('attendances');
 Route::get('/attendances/print', [AttendancesController::class, 'print'])->name('attendances.print');
+Route::post('/attendances', [AttendancesController::class, 'store'])->name('attendances.store');
 Route::put('/attendances', [AttendancesController::class, 'update'])->name('attendances.update');
 Route::get('/announcements', [AnnouncementsController::class, 'index'])->name('announcements');
 Route::get('/announcements/create', [AnnouncementsController::class, 'create'])->name('announcements.create');

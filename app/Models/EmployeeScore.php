@@ -33,7 +33,11 @@ class EmployeeScore extends Model
     }
 
     public function getSimplifiedScores($count = 10) {
-        return $this->with('employee', 'scoredBy', 'scoreCategory')->latest()->groupBy('group_id')->paginate($count);
+        if(auth()->user()->isAdmin()) {
+            return $this->with('employee', 'scoredBy', 'scoreCategory')->latest()->groupBy('group_id')->paginate($count);
+        } else {
+            return $this->with('employee', 'scoredBy', 'scoreCategory')->where('employee_id', auth()->user()->employee->id)->latest()->groupBy('group_id')->paginate($count);
+        }
     }
     
     public function getDataToCreate() {

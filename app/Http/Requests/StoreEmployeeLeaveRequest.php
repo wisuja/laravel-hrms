@@ -25,7 +25,7 @@ class StoreEmployeeLeaveRequest extends FormRequest
     {
         return [
             'employee_id' => 'exists:employees,id|nullable',
-            'from' => 'date|nullable',
+            'from' => 'date|nullable|after:today',
             'to' => 'date|nullable|after_or_equal:from',
             'message' => 'nullable',
             'comment' => 'nullable',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeScoreRequest;
 use App\Models\EmployeeScore;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -53,7 +54,11 @@ class EmployeeScoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreEmployeeScoreRequest $request)
-    {        
+    {
+        if($this->employeeScores->where('employee_id', $request->input('employee_id'))->whereBetween('created_at', [Carbon::today()->subMonth(), Carbon::tomorrow()])->exists()) {
+            return redirect()->route('employees-performance-score')->with('status', 'You can only score same employee for once in a month.');
+        }        
+        
         $group_id = Str::uuid();
 
         foreach($request->categoryAndScore as $cns) {

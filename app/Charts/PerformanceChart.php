@@ -4,6 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Charts;
 
+use App\Models\EmployeeScore;
+use App\Models\ScoreCategory;
+use Carbon\Carbon;
 use Chartisan\PHP\Chartisan;
 use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
@@ -17,9 +20,24 @@ class PerformanceChart extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
+        $scoreCategories = ScoreCategory::all();
+
+        $labels = [];
+        $scores = [];
+        foreach($scoreCategories as $category) {
+            array_push($labels, $category->name);
+
+            $employeeScores = EmployeeScore::where('score_category_id', $category->id)->whereBetween('updated_at', [Carbon::today()->subMonth(), Carbon::tomorrow()])->get();
+
+            $totalScore = $employeeScores->reduce(function ($total, $current) {
+                return $total + $current->score;
+            }, 0);
+
+            $avgScore = $totalScore / count($employeeScores);
+            array_push($scores, $avgScore);
+        }
         return Chartisan::build()
-            ->labels(['First', 'Second', 'Third'])
-            ->dataset('Sample', [1, 2, 3])
-            ->dataset('Sample 2', [3, 2, 1]);
+            ->labels($labels)
+            ->dataset('Score', $scores);
     }
 }

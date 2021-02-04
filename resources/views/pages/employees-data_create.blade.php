@@ -146,8 +146,8 @@
                   <label for="gender">Gender:</label>
                   <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" required>
                     <option selected value="">Choose...</option>
-                    <option value="M">Male</option>
-                    <option value="F" >Female</option>
+                    <option value="M" {{ old('gender') == "M" ? 'selected': '' }}>Male</option>
+                    <option value="F" {{ old('gender') == "F" ? 'selected': '' }}>Female</option>
                   </select>
                 </div>
                 @error('gender')

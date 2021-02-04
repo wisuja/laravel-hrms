@@ -56,7 +56,84 @@ class AttendancesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inId = $this->getId($this->attendanceTimes, "IN");
+        $outId = $this->getId($this->attendanceTimes, "OUT");
+        
+        $now = Carbon::now('Asia/Jakarta');
+        $checkInTime = Carbon::createFromTime(8,0,0,'Asia/Jakarta');
+        $checkOutTime = Carbon::createFromTime(16,0,0,'Asia/Jakarta');
+
+        $type = "";
+        $time = "";
+
+        if($request->sick == 1) {
+            $type = "SICK";
+            $time = "OTHER";
+        } else { 
+            $checkForAttendance = Attendance::whereBetween('created_at', [Carbon::today('Asia/Jakarta'), Carbon::tomorrow('Asia/Jakarta')])
+                                                ->where('employee_id', auth()->user()->employee->id)
+                                                ->whereIn('attendance_time_id', [$inId, $outId])
+                                                ->first();
+            
+            if ($checkForAttendance === null) {
+                $time = "IN";
+
+                if($now <= $checkInTime) {
+                    $type = "ONTIME";
+                } else {
+                    $type = "LATE";
+                }
+            } else if ($checkForAttendance->attendance_time_id !== $inId || $checkForAttendance->attendance_time_id !== $outId) {
+                if($checkForAttendance->attendance_time_id == $inId) {
+                    $time = "OUT";
+
+                    if($now < $checkOutTime) {
+                        return redirect()->route('attendances')->with('status', 'Please wait for checkout time.');
+                    }
+
+                    if($now == $checkOutTime) {
+                        $type = "ONTIME";
+                    } else {
+                        $type = "OVERTIME";
+                    }
+                } else {
+                    $time = "IN";
+
+                    if($now <= $checkInTime) {
+                        $type = "ONTIME";
+                    } else {
+                        $type = "LATE";
+                    }
+                }
+            }
+        }
+
+        $this->attendances->create([
+            'employee_id' => auth()->user()->employee->id,
+            'attendance_time_id' => $this->getId($this->attendanceTimes, $time),
+            'attendance_type_id' => $this->getId($this->attendanceTypes, $type),
+            'message' => $request->input('message'),
+        ]);
+
+        return back();
+
+
+        // $attendanceId = $this->attendances->where([
+        //     ['employee_id' ,'=', auth()->user()->employee->id],
+        //     ['attendance_time_id' ,'=', $inId],
+        //     ['created_at' ,'>=', Carbon::today()],
+        // ])->first()->id;
+
+        // if($request->sick == 1) {
+        //     Attendance::whereId($attendanceId)
+        //             ->update([
+        //                 'attendance_time_id' => $outId,
+        //                 'attendance_type_id' => $sickId, 
+        //                 'message' => $request->input('message'),
+        //             ]);
+        //     return back();
+        // }
+
     }
 
     /**
@@ -90,36 +167,7 @@ class AttendancesController extends Controller
      */
     public function update(Request $request, Attendance $attendance)
     {
-        $inId = $this->attendanceTimes->filter(function ($item) {
-            return $item->name == 'IN';
-        })->first()->id;
-        $outId = $this->attendanceTimes->filter(function ($item) {
-            return $item->name == 'OUT';
-        })->first()->id;
 
-        $sickId = $this->attendanceTypes->filter(function ($item) {
-            return $item->name == 'SICK';
-        })->first()->id;
-
-        $attendanceId = $this->attendances->where([
-            ['employee_id' ,'=', auth()->user()->employee->id],
-            ['attendance_time_id' ,'=', $inId],
-            ['created_at' ,'>=', Carbon::today()],
-        ])->first()->id;
-
-        if($request->sick == 1) {
-            Attendance::whereId($attendanceId)
-                    ->update([
-                        'attendance_time_id' => $outId,
-                        'attendance_type_id' => $sickId, 
-                        'message' => $request->input('message'),
-                    ]);
-            return back();
-        }
-
-        $now = Carbon::now('Asia/Jakarta');
-        $checkInTime = Carbon::createFromTime(8,0,0,'Asia/Jakarta');
-        $checkOutTime = Carbon::createFromTime(16,0,0,'Asia/Jakarta');
     }
 
     /**
@@ -138,4 +186,12 @@ class AttendancesController extends Controller
         $attendances = Attendance::all();
         return view('pages.attendances_print', compact('attendances'));
     }
+
+    public function getId ($array, $type) 
+    {
+        return $array->filter(function ($item) use ($type) {
+            return $item->name == $type;
+        })->first()->id;
+    }
+    
 }

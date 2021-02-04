@@ -33,6 +33,7 @@ class EmployeesController extends Controller
     public function index()
     {
         $employees = $this->employees->paginate();
+
         return view('pages.employees-data', compact('employees'));
     }
 

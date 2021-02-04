@@ -2,13 +2,8 @@
 
 namespace App\Console;
 
-use App\Console\Commands\AttendanceDailyCommand;
-use App\Models\Attendance;
-use App\Models\AttendanceTime;
-use App\Models\AttendanceType;
-use App\Models\Employee;
-use App\Models\EmployeeLeaveRequest;
-use Carbon\Carbon;
+use App\Console\Commands\AttendanceAbsent;
+use App\Console\Commands\AttendanceLeave;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -20,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        AttendanceDailyCommand::class
+        AttendanceAbsent::class,
+        AttendanceLeave::class,
     ];
 
     /**
@@ -31,7 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('attendance:daily')->dailyAt('09:00');
+        $schedule->command('attendance:leave')->dailyAt('09:00');
+        $schedule->command('attendance:absent')->dailyAt('16:00');
     }
 
     /**

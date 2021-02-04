@@ -82,17 +82,18 @@
             </div>
           </div>
 
-          @if ($employeeLeaveRequest->status == 'WAITING_FOR_APPROVAL')              
+          @if ($employeeLeaveRequest->status == 'WAITING_FOR_APPROVAL' && collect($accesses)->where('menu_id', 4)->first()->status == 2)              
             <div class="row">
               <div class="col-12">
-                @if (Auth::user()->isAdmin())
-                <button type="button" class="btn btn-success mr-2 px-5" data-toggle="modal" data-target="#acceptModal">
-                  Accept
-                </button>
-                <button type="button" class="btn btn-danger mr-2 px-5" data-toggle="modal" data-target="#rejectModal">
-                  Reject
-                </button>
-                @else
+                @if (auth()->user()->isAdmin() && auth()->user()->employee->id !== $employeeLeaveRequest->employee_id)
+                  <button type="button" class="btn btn-success mr-2 px-5" data-toggle="modal" data-target="#acceptModal">
+                    Accept
+                  </button>
+                  <button type="button" class="btn btn-danger mr-2 px-5" data-toggle="modal" data-target="#rejectModal">
+                    Reject
+                  </button>
+                @endif
+                @if (auth()->user()->employee->id == $employeeLeaveRequest->employee_id)
                   <form action="{{ route('employees-leave-request.edit', ['employeeLeaveRequest' => $employeeLeaveRequest->id]) }}" class="d-inline-block">
                     <button type="submit" class="btn btn-warning mr-2 px-5">Edit</button>
                   </form>

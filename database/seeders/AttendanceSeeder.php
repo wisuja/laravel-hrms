@@ -15,7 +15,7 @@ class AttendanceSeeder extends Seeder
      */
     public function run()
     {
-        $attendanceTimes = ["IN", "OUT"];
+        $attendanceTimes = ["IN", "OUT", "OTHER"];
         $attendanceTypes = ["ONTIME", "LATE", "OVERTIME", "SICK", "ABSENT", "ON_LEAVE_DAYS"];
 
         foreach($attendanceTimes as $time) 

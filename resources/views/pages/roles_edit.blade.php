@@ -32,20 +32,20 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <label>{{ Str::ucfirst($access->menu->name) }}</label>
-                  <div class="form-check">
+                  <label class="d-block">{{ Str::ucfirst($access->menu->name) }}</label>
+                  <div class="form-check-inline">
                     <input class="form-check-input" type="radio" name="menuAndAccessLevel[{{ $loop->index }}][{{ $access->menu->id }}]" id="{{ $access->menu->name }}_disabled" value="0" required {{ $access->status == 0 ? 'checked' : '' }}>
                     <label class="form-check-label" for="{{ $access->menu->name }}_disabled">
                       Disabled
                     </label>
                   </div>
-                  <div class="form-check">
+                  <div class="form-check-inline">
                     <input class="form-check-input" type="radio" name="menuAndAccessLevel[{{ $loop->index }}][{{ $access->menu->id }}]" id="{{ $access->menu->name }}_view" value="1" {{ $access->status == 1 ? 'checked' : '' }}>
                     <label class="form-check-label" for="{{ $access->menu->name }}_view">
                       View
                     </label>
                   </div>
-                  <div class="form-check">
+                  <div class="form-check-inline">
                     <input class="form-check-input" type="radio" name="menuAndAccessLevel[{{ $loop->index }}][{{ $access->menu->id }}]" id="{{ $access->menu->name }}_all" value="2" {{ $access->status == 2 ? 'checked' : '' }}>
                     <label class="form-check-label" for="{{ $access->menu->name }}_all">
                       All

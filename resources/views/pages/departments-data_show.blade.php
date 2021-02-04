@@ -40,17 +40,19 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12">
-      <form action="{{ route('departments-data.edit', ['department' => $department->id]) }}" class="d-inline-block">
-        <button type="submit" class="btn btn-warning mr-2 px-5">Edit</button>
-      </form>
-      <form action="{{ route('departments-data.destroy', ['department' => $department->id]) }}" method="POST" class="d-inline-block">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger mr-2 px-5" onclick="return confirm('Are you sure deleting this department?')">Delete</button>
-      </form>
+  @if (collect($accesses)->where('menu_id', 2)->first()->status == 2)
+    <div class="row">
+      <div class="col-12">
+        <form action="{{ route('departments-data.edit', ['department' => $department->id]) }}" class="d-inline-block">
+          <button type="submit" class="btn btn-warning mr-2 px-5">Edit</button>
+        </form>
+        <form action="{{ route('departments-data.destroy', ['department' => $department->id]) }}" method="POST" class="d-inline-block">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger mr-2 px-5" onclick="return confirm('Are you sure deleting this department?')">Delete</button>
+        </form>
+      </div>
     </div>
-  </div>
+  @endif
 </div>
 @endsection
