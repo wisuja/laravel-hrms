@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRecruitmentCandidateRequest;
 use App\Models\RecruitmentCandidate;
 use Illuminate\Http\Request;
 
 class RecruitmentCandidatesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');  
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -38,9 +34,20 @@ class RecruitmentCandidatesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRecruitmentCandidateRequest $request)
     {
-        //
+        RecruitmentCandidate::create([
+            'recruitment_id' => $request->input('recruitment_id'),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'message' => $request->input('message'),
+            'address' => $request->input('address'),
+            'photo' => $request->file('photo')->store('photos', 'public'),
+            'cv' => $request->file('cv')->store('cvs', 'public')
+        ]);
+
+        return back()->with('status', 'Successfully apply for this job.');
     }
 
     /**

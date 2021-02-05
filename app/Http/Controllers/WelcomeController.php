@@ -40,4 +40,9 @@ class WelcomeController extends Controller
         $recruitments = $this->recruitments->where('is_active', 1)->latest()->paginate(10);
         return view('pages.welcome_recruitments', compact('recruitments'));
     }
+
+    public function recruitmentShow (Recruitment $recruitment) 
+    {
+        return view('pages.welcome_recruitments_show', compact('recruitment'));
+    }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\EmployeeScoresController;
 use App\Http\Controllers\PositionsController;
 use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\RecruitmentCandidatesController;
 use App\Http\Controllers\RecruitmentsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScoreCategoriesController;
@@ -39,6 +40,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome')->middlewar
 Route::get('/welcome/announcements', [WelcomeController::class, 'announcements'])->name('welcome.announcements')->middleware('guest');
 Route::get('/welcome/announcements/{announcement}', [WelcomeController::class, 'announcementShow'])->name('welcome.announcements.show')->middleware('guest');
 Route::get('/welcome/recruitments', [WelcomeController::class, 'recruitments'])->name('welcome.recruitments')->middleware('guest');
+Route::get('/welcome/recruitments/{recruitment}', [WelcomeController::class, 'recruitmentShow'])->name('welcome.recruitments.show')->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/employees-data', [EmployeesController::class, 'index'])->name('employees-data');
 Route::get('/employees-data/create', [EmployeesController::class, 'create'])->name('employees-data.create');
@@ -100,6 +102,7 @@ Route::get('/recruitments/{recruitment}/edit', [RecruitmentsController::class, '
 Route::post('/recruitments', [RecruitmentsController::class, 'store'])->name('recruitments.store');
 Route::put('/recruitments/{recruitment}', [RecruitmentsController::class, 'update'])->name('recruitments.update');
 Route::delete('/recruitments/{recruitment}', [RecruitmentsController::class, 'destroy'])->name('recruitments.destroy');
+Route::post('/recruitment-candidates', [RecruitmentCandidatesController::class, 'store'])->name('recruitment-candidates.store');
 Route::get('/score-categories', [ScoreCategoriesController::class, 'index'])->name('score-categories');
 Route::get('/score-categories/create', [ScoreCategoriesController::class, 'create'])->name('score-categories.create');
 Route::get('/score-categories/print', [ScoreCategoriesController::class, 'print'])->name('score-categories.print');
