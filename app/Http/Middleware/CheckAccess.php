@@ -24,9 +24,16 @@ class CheckAccess
             $name = "data";
         } else if (in_array($name, array('users', 'roles'))) {
             $name = "accounts";
-        }  else if ($name == "profile") {
+        } else if ($name == "profile") {
             $name = "user";
+        } else if ($name == "employees-leave-request") {
+            $name = "leave-request";
+        } else if ($name == "employees-performance-score") {
+            $name = "performance";
+        } else if ($name == "score-categories") {
+            $name = "score-category";
         }
+
 
         $menuId = Menu::whereName($name)->first()->id;
         $accessType = Access::where([
