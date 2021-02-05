@@ -18,7 +18,17 @@ class CheckAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        $menuId = Menu::whereName($request->route()->getName())->first()->id;
+        $name = explode(".", $request->route()->getName())[0];
+
+        if(in_array($name, array('employees-data', 'departments-data', 'positions-data'))){
+            $name = "data";
+        } else if (in_array($name, array('users', 'roles'))) {
+            $name = "accounts";
+        }  else if ($name == "profile") {
+            $name = "user";
+        }
+
+        $menuId = Menu::whereName($name)->first()->id;
         $accessType = Access::where([
             ["menu_id",'=', $menuId],
             ["role_id",'=', auth()->user()->role_id],

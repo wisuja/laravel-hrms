@@ -73,7 +73,7 @@
                         <p class="card-text">{{ $recruitment->description }}</p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Read more</a>
+                        <a href="{{ route('welcome.recruitments.show', ['recruitment' => $recruitment->id ]) }}" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
             </div>
