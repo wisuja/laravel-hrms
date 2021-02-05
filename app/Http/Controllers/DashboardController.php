@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announcement;
+use App\Models\Attendance;
+use App\Models\AttendanceTime;
 use App\Models\Employee;
 use App\Models\RecruitmentCandidate;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -38,6 +41,13 @@ class DashboardController extends Controller
         $employeesCount = $this->employees->getCount();
         $recruitmentCandidatesCount = $this->recruitmentCandidates->getCount();
         $endingEmployees = $this->employees->getEndingContractEmployees();
-        return view('pages.dashboard', compact('announcements', 'employeesCount', 'recruitmentCandidatesCount', 'endingEmployees'));
+
+        $attendanceTimesId = AttendanceTime::whereIn("name", ["IN", "OUT"])->get();
+        $checkForAttendance = Attendance::whereBetween('created_at', [Carbon::today('Asia/Jakarta'), Carbon::tomorrow('Asia/Jakarta')])
+                                ->where('employee_id', auth()->user()->employee->id)
+                                ->whereIn('attendance_time_id', $attendanceTimesId)
+                                ->exists();
+
+        return view('pages.dashboard', compact('announcements', 'employeesCount', 'recruitmentCandidatesCount', 'endingEmployees', 'checkForAttendance'));
     }
 }
