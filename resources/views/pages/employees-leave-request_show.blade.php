@@ -85,7 +85,7 @@
           @if ($employeeLeaveRequest->status == 'WAITING_FOR_APPROVAL' && collect($accesses)->where('menu_id', 4)->first()->status == 2)              
             <div class="row">
               <div class="col-12">
-                @if (auth()->user()->isAdmin() && auth()->user()->employee->id !== $employeeLeaveRequest->employee_id)
+                @if (auth()->user()->isAdmin())
                   <button type="button" class="btn btn-success mr-2 px-5" data-toggle="modal" data-target="#acceptModal">
                     Accept
                   </button>

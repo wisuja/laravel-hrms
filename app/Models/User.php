@@ -43,23 +43,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role() {
+    public function role() 
+    {
         return $this->belongsTo(Role::class);
     }
 
-    public function employee () {
+    public function employee () 
+    {
         return $this->hasOne(Employee::class);
     }
 
-    public function paginate($count = 10) {
+    public function admin() 
+    {
+        return $this->hasOne(Admin::class);
+    }
+
+    public function paginate($count = 10) 
+    {
         return $this->with('role')->latest()->paginate($count);
     }
 
-    public function getProfile() {
+    public function getProfile() 
+    {
         return $this->with('employee')->where('id', auth()->id())->first();
     }
 
-    public function isAdmin() {
-        return in_array($this->role_id, [1]);
+    public function isAdmin() 
+    {
+        return $this->admin()->count() == 1;
     }
 }
