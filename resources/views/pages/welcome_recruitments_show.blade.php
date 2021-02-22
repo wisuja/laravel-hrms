@@ -107,7 +107,7 @@
           @enderror
           <div class="form-group">
             <label for="phone">Phone:</label>
-            <input type="text" name="phone" id="phone" value="{{ old('phone') }}" required placeholder="Enter phone" class="form-control @error('phone') is-invalid @enderror">
+            <input type="text" name="phone" id="phone" value="{{ old('phone') }}" required placeholder="Enter phone" class="form-control @error('phone') is-invalid @enderror" minlength="11" maxlength="13">
           </div>
           @error('phone')
             <div class="alert alert-danger">{{ $message }}</div>

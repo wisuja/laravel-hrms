@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProfileRequest;
 use App\Models\Employee;
 use App\Models\EmployeeDetail;
+use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -104,6 +105,10 @@ class ProfilesController extends Controller
         }
 
         EmployeeDetail::whereEmployeeId($employee->id)->update($updateArray);
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " updated profile"
+        ]);
 
         return redirect()->route('profile')->with('status', 'Successfully updated the profile.');
     }

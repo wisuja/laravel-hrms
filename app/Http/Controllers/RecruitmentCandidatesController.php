@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRecruitmentCandidateRequest;
+use App\Models\Log;
+use App\Models\Recruitment;
 use App\Models\RecruitmentCandidate;
 use Illuminate\Http\Request;
 
@@ -45,6 +47,12 @@ class RecruitmentCandidatesController extends Controller
             'address' => $request->input('address'),
             'photo' => $request->file('photo')->store('photos', 'public'),
             'cv' => $request->file('cv')->store('cvs', 'public')
+        ]);
+
+        $name = Recruitment::whereId($request->input('recruitment_id'))->first()->position->name;
+
+        Log::create([
+            'description' => $request->input('name') . " applied for position named '" . $name . "'"
         ]);
 
         return back()->with('status', 'Successfully apply for this job.');

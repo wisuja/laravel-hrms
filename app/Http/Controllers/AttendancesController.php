@@ -116,24 +116,6 @@ class AttendancesController extends Controller
         ]);
 
         return back();
-
-
-        // $attendanceId = $this->attendances->where([
-        //     ['employee_id' ,'=', auth()->user()->employee->id],
-        //     ['attendance_time_id' ,'=', $inId],
-        //     ['created_at' ,'>=', Carbon::today()],
-        // ])->first()->id;
-
-        // if($request->sick == 1) {
-        //     Attendance::whereId($attendanceId)
-        //             ->update([
-        //                 'attendance_time_id' => $outId,
-        //                 'attendance_type_id' => $sickId, 
-        //                 'message' => $request->input('message'),
-        //             ]);
-        //     return back();
-        // }
-
     }
 
     /**

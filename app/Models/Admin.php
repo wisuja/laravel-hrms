@@ -9,8 +9,8 @@ class Admin extends Model
 {
     use HasFactory;
 
-    public function user() 
+    public function role() 
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Role::class);
     }
 }

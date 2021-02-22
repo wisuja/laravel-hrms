@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoleRequest;
 use App\Models\Access;
+use App\Models\Admin;
+use App\Models\Log;
 use App\Models\Menu;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -51,6 +53,12 @@ class RolesController extends Controller
     {
         $roleId = Role::create(['name' => $request->input('name')])->id;
 
+        if($request->input('is_super_user') == "1") {
+            Admin::create([
+                'role_id' => $roleId
+            ]);
+        }
+
         foreach($request->menuAndAccessLevel as $mna) {
             $key = key($mna);
             Access::create([
@@ -59,6 +67,10 @@ class RolesController extends Controller
                 'status' => $mna[$key]
             ]);
         }
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " created a role named '" . $request->input('name') . "'"
+        ]);
 
         return redirect()->route('roles')->with('status', 'Successfully created a role.');
     }
@@ -97,7 +109,14 @@ class RolesController extends Controller
      */
     public function update(StoreRoleRequest $request, Role $role)
     {
-        $role->update(['name' => $request->input('name')]);
+        $role->update([
+                'name' => $request->input('name'),
+                'is_super_user' => $request->input('is_super_user'),
+            ]);
+
+        if($request->input('is_super_user') == "0") {
+            Admin::whereRoleId($role->id)->delete();
+        }
 
         foreach($request->menuAndAccessLevel as $mna) {
             $key = key($mna);
@@ -108,6 +127,10 @@ class RolesController extends Controller
                 'status' => $mna[$key]
             ]);
         }
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " updated a role's detail named '" . $role->name . "'"
+        ]);
 
         return redirect()->route('roles')->with('status', 'Successfully updated role.');
     }
@@ -121,6 +144,10 @@ class RolesController extends Controller
     public function destroy(Role $role)
     {
         $this->roles->where('id', $role->id)->delete();
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " deleted a role named '" . $role->name . "'"
+        ]);
 
         return redirect()->route('roles')->with('status', 'Successfully deleted role.');
     }

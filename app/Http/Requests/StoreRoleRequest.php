@@ -25,6 +25,7 @@ class StoreRoleRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'is_super_user' => 'required|boolean',
             'menuAndAccessLevel' => 'required'
         ];
     }

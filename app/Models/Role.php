@@ -11,7 +11,16 @@ class Role extends Model
 
     protected $guarded = [];
 
+    public function admin() 
+    {
+        return $this->hasOne(Admin::class);
+    }
+
     public function paginate($count = 10) {
         return $this->latest()->paginate($count);
+    }
+
+    public function isAdmin() {
+        return $this->admin()->whereRoleId($this->id)->count() == 1;
     }
 }

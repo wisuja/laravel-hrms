@@ -21,6 +21,15 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="is_super_user">Is Superuser?:</label>
+              <input type="text" name="is_super_user" id="is_super_user" class="form-control-plaintext" readonly value="{{ $role->is_super_user == true ? 'Yes' : 'No' }}">
+            </div>
+          </div>
+        </div>
         
         @foreach ($accessesForEditing as $access)
           <div class="row">

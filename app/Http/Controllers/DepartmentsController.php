@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Models\Department;
+use App\Models\Log;
 use Illuminate\Http\Request;
 
 class DepartmentsController extends Controller
@@ -47,6 +48,10 @@ class DepartmentsController extends Controller
     {
         Department::create($request->validated());
 
+        Log::create([
+            'description' => auth()->user()->employee->name . " created an department named '" . $request->input('name') . "'"
+        ]);
+
         return redirect()->route('departments-data')->with('status', 'Successfully created a department.');
     }
 
@@ -83,6 +88,10 @@ class DepartmentsController extends Controller
     {
         Department::where('id', $department->id)->update($request->validated());
 
+        Log::create([
+            'description' => auth()->user()->employee->name . " updated an department named '" . $department->name . "'"
+        ]);
+
         return redirect()->route('departments-data')->with('status', 'Successfully updated department.');
     }
 
@@ -95,6 +104,10 @@ class DepartmentsController extends Controller
     public function destroy(Department $department)
     {
         Department::where('id', $department->id)->delete();
+        
+        Log::create([
+            'description' => auth()->user()->employee->name . " deleted an department named '" . $department->name . "'"
+        ]);
 
         return redirect()->route('departments-data')->with('status', 'Successfully deleted department.');
     }

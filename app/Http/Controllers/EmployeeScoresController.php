@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeScoreRequest;
+use App\Models\Employee;
 use App\Models\EmployeeScore;
+use App\Models\Log;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -71,6 +73,12 @@ class EmployeeScoresController extends Controller
             ]);
         }
 
+        $employeeName = Employee::whereId($request->input('employee_id'))->first()->name;
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " created performance scores for employee named '" . $employeeName . "'"
+        ]);
+
         return redirect()->route('employees-performance-score')->with('status', "Successfully added an employee's score");
     }
 
@@ -129,6 +137,12 @@ class EmployeeScoresController extends Controller
             ]);
         }
 
+        $employeeName = Employee::whereId($request->input('employee_id'))->first()->name;
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " updated performance scores for employee named '" . $employeeName . "'"
+        ]);
+
         return redirect()->route('employees-performance-score')->with('status', "Successfully updated employee's score");
     }
 
@@ -141,6 +155,12 @@ class EmployeeScoresController extends Controller
     public function destroy(EmployeeScore $employeeScore)
     {
         EmployeeScore::where('group_id', $employeeScore->group_id)->delete();
+
+        $employeeName = Employee::whereId($employeeScore->employee_id)->first()->name;
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " deleted performance scores for employee named '" . $employeeName . "'"
+        ]);
 
         return redirect()->route('employees-performance-score')->with('status', "Successfully deleted employee's score");
     }

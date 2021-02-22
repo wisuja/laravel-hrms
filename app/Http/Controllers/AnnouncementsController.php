@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAnnouncementRequest;
 use App\Models\Announcement;
 use App\Models\Department;
+use App\Models\Log;
 use Illuminate\Http\Request;
 
 class AnnouncementsController extends Controller
@@ -60,6 +61,10 @@ class AnnouncementsController extends Controller
 
         Announcement::create($createArray);
 
+        Log::create([
+            'description' => auth()->user()->employee->name . " created an announcement titled '" . $request->input('title') . "'"
+        ]);
+
         return redirect()->route('announcements')->with('status', 'Successfully created an announcement.');
     }
 
@@ -110,6 +115,10 @@ class AnnouncementsController extends Controller
             ['created_by', '=', auth()->user()->employee->id]
         ])->update($updateArray);
 
+        Log::create([
+            'description' => auth()->user()->employee->name . " updated an announcement titled '" . $announcement->title . "'"
+        ]);
+
         return redirect()->route('announcements')->with('status', 'Successfully updated announcement.');
     }
 
@@ -125,6 +134,10 @@ class AnnouncementsController extends Controller
             ['id', '=', $announcement->id],
             ['created_by', '=', auth()->user()->employee->id]
         ])->delete();
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " deleted an announcement titled '" . $announcement->title . "'"
+        ]);
 
         return redirect()->route('announcements')->with('status', 'Successfully deleted announcement.');
     }

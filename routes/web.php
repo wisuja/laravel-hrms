@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployeeLeaveRequestsController;
 use App\Http\Controllers\EmployeeLeavesController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\EmployeeScoresController;
+use App\Http\Controllers\LogsController;
 use App\Http\Controllers\PositionsController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\RecruitmentCandidatesController;
@@ -113,6 +114,8 @@ Route::middleware('check.access')->group(function() {
     Route::post('/score-categories', [ScoreCategoriesController::class, 'store'])->name('score-categories.store');
     Route::put('/score-categories/{scoreCategory}', [ScoreCategoriesController::class, 'update'])->name('score-categories.update');
     Route::delete('/score-categories/{scoreCategory}', [ScoreCategoriesController::class, 'destroy'])->name('score-categories.destroy');
+    Route::get('/logs', [LogsController::class, 'index'])->name('logs');
+    Route::get('/logs/print', [LogsController::class, 'print'])->name('logs.print');
     Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::get('/users/print', [UsersController::class, 'print'])->name('users.print');
     Route::get('/roles', [RolesController::class, 'index'])->name('roles');

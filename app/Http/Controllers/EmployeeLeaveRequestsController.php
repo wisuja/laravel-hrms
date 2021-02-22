@@ -6,6 +6,7 @@ use App\Http\Requests\StoreEmployeeLeaveRequest;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\EmployeeLeave;
 use App\Models\EmployeeLeaveRequest;
+use App\Models\Log;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -49,11 +50,30 @@ class EmployeeLeaveRequestsController extends Controller
      */
     public function store(StoreEmployeeLeaveRequest $request)
     {
+        $employeeLeave = EmployeeLeave::where('employee_id', $request->input('employee_id'))->first();
+
+        $from = Carbon::parse($request->input('from'));
+        $to = Carbon::parse($request->input('to'));
+
+        Carbon::setWeekendDays([
+            Carbon::SUNDAY,
+        ]);
+
+        $diff = $from->diffInWeekdays($to);
+
+        if($employeeLeave->leaves_quota - $employeeLeave->used_leaves < $diff) {
+            return back()->with('status', 'You take too much days off.');
+        }
+
         $this->employeeLeaveRequests->create([
             'employee_id' => $request->input('employee_id'),
             'from' => $request->input('from'),
             'to' => $request->input('to'),
             'message' => $request->input('message')
+        ]);
+        
+        Log::create([
+            'description' => auth()->user()->employee->name . " created a leave request from '" . $request->input('from') . "' to '" . $request->input('to') . "'"
         ]);
 
         return redirect()->route('employees-leave-request')->with('status', 'Successfully created an employee leave request.');
@@ -111,8 +131,23 @@ class EmployeeLeaveRequestsController extends Controller
                 'message' => $request->input('message')
                 ]);
 
+            Log::create([
+                'description' => auth()->user()->employee->name . " updated a leave request's detail"
+            ]);
+
             return redirect()->route('employees-leave-request')->with('status', 'Successfully updated employee leave request.');
         } else if ($request->type == 'accept') {
+            $employeeLeave = EmployeeLeave::where('employee_id', $employeeLeaveRequest->employee_id)->first();
+
+            $from = Carbon::parse($employeeLeaveRequest->from);
+            $to = Carbon::parse($employeeLeaveRequest->to);
+    
+            Carbon::setWeekendDays([
+                Carbon::SUNDAY,
+            ]);
+    
+            $diff = $from->diffInWeekdays($to);
+
             $this->employeeLeaveRequests->where('id', $employeeLeaveRequest->id)
                 ->update([
                 'status' => 'APPROVED',
@@ -120,6 +155,12 @@ class EmployeeLeaveRequestsController extends Controller
                 'comment' => $request->input('comment')
                 ]);
 
+            $employeeLeave->update(['used_leaves' => $employeeLeave->used_leaves + $diff]);
+
+            Log::create([
+                'description' => auth()->user()->employee->name . " approved ". $employeeLeaveRequest->employee->name  ."'s leave request from '" . $employeeLeaveRequest->from . "' to '" . $employeeLeaveRequest->to . "'"
+            ]);
+        
             return redirect()->route('employees-leave-request')->with('status', 'Successfully accepted employee leave request.');
         };
     }
@@ -138,6 +179,10 @@ class EmployeeLeaveRequestsController extends Controller
                 'checked_by' => auth()->user()->employee->id,
                 'comment' => request()->input('comment')
             ]);
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " rejected ". $employeeLeaveRequest->employee->name  ."'s leave request from '" . $employeeLeaveRequest->from . "' to '" . $employeeLeaveRequest->to . "'"
+        ]);
         
         return redirect()->route('employees-leave-request')->with('status', 'Successfully rejected employee leave request.');   
     }

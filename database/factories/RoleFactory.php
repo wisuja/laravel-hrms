@@ -22,14 +22,16 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word()
+            'name' => $this->faker->word(),
+            'is_super_user' => false
         ];
     }
 
     public function admin() {
         return $this->state(function($attributes) {
             return [
-                'name' => 'Administrator'
+                'name' => 'Administrator',
+                'is_super_user' => true,
             ];
         });
     }

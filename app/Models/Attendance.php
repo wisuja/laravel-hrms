@@ -33,6 +33,6 @@ class Attendance extends Model
     }
 
     public function getCreatedAtAttribute($value) {
-        return Carbon::parse($value)->format('d-m-Y h:m:s');
+        return Carbon::parse($value)->format('d-m-Y H:i:s');
     }
 }

@@ -13,7 +13,7 @@
     <div class="col-12 mb-3">
       <div class="bg-light text-dark card p-3 overflow-auto">
         <div class="d-flex justify-content-between">
-          @if (collect($accesses)->where('menu_id', 9)->first()->status == 2)
+          @if (collect($accesses)->where('menu_id', 10)->first()->status == 2)
             <a href="{{ route('employees-data.create') }}" class="btn btn-outline-dark mb-3 w-25">
               <i class="fas fa-plus mr-1"></i>
                 <span> Create</span>

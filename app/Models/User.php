@@ -53,11 +53,6 @@ class User extends Authenticatable
         return $this->hasOne(Employee::class);
     }
 
-    public function admin() 
-    {
-        return $this->hasOne(Admin::class);
-    }
-
     public function paginate($count = 10) 
     {
         return $this->with('role')->latest()->paginate($count);
@@ -70,6 +65,6 @@ class User extends Authenticatable
 
     public function isAdmin() 
     {
-        return $this->admin()->count() == 1;
+        return $this->role->isAdmin();
     }
 }

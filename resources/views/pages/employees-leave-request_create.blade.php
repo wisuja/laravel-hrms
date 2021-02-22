@@ -12,6 +12,11 @@
   <div class="row">
     <div class="col-12">
         <h5 class="text-center font-weight-bold mb-3">Create A New Employee Leave Request</h5>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <form action="{{ route('employees-leave-request.store') }}" method="POST">
           @csrf
           <input type="hidden" name="employee_id" value="{{ auth()->user()->employee->id }}">

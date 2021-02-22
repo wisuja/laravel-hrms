@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Access;
+use App\Models\Admin;
 use App\Models\Menu;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
@@ -22,5 +23,7 @@ class AccessSeeder extends Seeder
         foreach($menus as $menu) {
             Access::factory()->create(['role_id' => $adminId, 'menu_id' => $menu->id]);
         }
+
+        Admin::create(['role_id' => $adminId]);
     }
 }

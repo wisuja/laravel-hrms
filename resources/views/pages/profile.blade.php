@@ -9,7 +9,7 @@
     </div>
   </div>
   
-  @if (collect($accesses)->where('menu_id', 10)->first()->status == 2)
+  @if (collect($accesses)->where('menu_id', 11)->first()->status == 2)
     <div class="row">
       <div class="col-12 mb-3">
         <div class="bg-light text-dark card p-3 overflow-auto">

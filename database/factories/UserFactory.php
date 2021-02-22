@@ -42,7 +42,7 @@ class UserFactory extends Factory
                 'email' => 'admin@gmail.com',
                 'password' => '$2y$10$.l6nAxxUdU2gayAYkQW9T.6d/35KCHr.eX3qdN9OrVt5xjX/Skwwu',
                 'role_id' => function() {
-                    return Role::factory()->create(['name' => 'Administrator'])->id;
+                    return Role::factory()->admin()->create()->id;
                 }
             ];
         });

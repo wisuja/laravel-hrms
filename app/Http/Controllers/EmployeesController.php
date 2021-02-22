@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Employee;
 use App\Models\EmployeeDetail;
 use App\Models\EmployeeLeave;
+use App\Models\Log;
 use App\Models\Position;
 use App\Models\Role;
 use App\Models\User;
@@ -97,6 +98,10 @@ class EmployeesController extends Controller
             'used_leaves' => 0 
         ]);
 
+        Log::create([
+            'description' => auth()->user()->employee->name . " created an employee named '" . $request->input('name') . "'"
+        ]);
+
         return redirect()->route('employees-data')->with('status', 'Successfully created an employee.');
     }
 
@@ -170,6 +175,10 @@ class EmployeesController extends Controller
                         'work_experience_in_years' => $request->input('work_experience_in_years'),
                     ]);
 
+        Log::create([
+            'description' => auth()->user()->employee->name . " updated an employee's detail named '" . $employee->name . "'"
+        ]);
+
         return redirect()->route('employees-data')->with('status', 'Successfully updated an employee.');
     }
 
@@ -182,6 +191,10 @@ class EmployeesController extends Controller
     public function destroy(Employee $employee)
     {
         User::where('id', $employee->user_id)->delete();
+
+        Log::create([
+            'description' => auth()->user()->employee->name . " deleted an employee named '" . $employee->name . "'"
+        ]);
 
         return redirect()->route('employees-data')->with('status', 'Successfully deleted an employee.');
     }

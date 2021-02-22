@@ -26,6 +26,19 @@
               @enderror
             </div>
           </div>
+
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="form-check">
+                <input type="hidden" name="is_super_user" value="0">
+                <input type="checkbox" class="form-check-input @error('is_super_user') is-invalid @enderror" id="is_super_user" name="is_super_user" value="1"  {{ old('is_super_user' ? 'checked' : '') }}>
+                <label class="form-check-label" for="is_super_user">Is Superuser?</label>
+              </div>
+              @error('is_super_user')
+                <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
+            </div>
+          </div>
           
           @foreach ($menus as $menu)
             <div class="row">
