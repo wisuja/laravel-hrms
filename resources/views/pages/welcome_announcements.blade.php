@@ -24,7 +24,7 @@
                       <p class="card-text">{{ $announcement->description }}</p>
                   </div>
                   <div class="card-footer">
-                      <a href="#" class="btn btn-primary">Read more</a>
+                      <a href="{{ route('welcome.announcements.show', ['announcement' => $announcement->id]) }}" class="btn btn-primary">Read more</a>
                   </div>
               </div>
           </div>
