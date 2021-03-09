@@ -42,7 +42,12 @@ class DashboardController extends Controller
         $recruitmentCandidatesCount = $this->recruitmentCandidates->getCount();
         $endingEmployees = $this->employees->getEndingContractEmployees();
 
-        $attendanceTimesId = AttendanceTime::whereIn("name", ["IN", "OUT"])->get();
+        $attendanceTimesId = AttendanceTime::whereIn("name", ["IN", "OUT"])
+                                ->get()
+                                ->map(function($item) {
+                                    return $item->id;
+                                });
+
         $checkForAttendance = Attendance::whereBetween('created_at', [Carbon::today('Asia/Jakarta'), Carbon::tomorrow('Asia/Jakarta')])
                                 ->where('employee_id', auth()->user()->employee->id)
                                 ->whereIn('attendance_time_id', $attendanceTimesId)
