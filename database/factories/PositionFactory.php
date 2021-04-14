@@ -26,7 +26,7 @@ class PositionFactory extends Factory
             'description' => $this->faker->paragraph(),
             'min_year_exp_required' => $this->faker->randomDigit(),
             'salary' => $this->faker->numberBetween(1000, 10000),
-            'open_for_recruitment' => $this->faker->boolean()
+            'open_for_recruitment' => true
         ];
     }
 }

@@ -27,6 +27,7 @@ class RecruitmentFactory extends Factory
             'position_id' => $position->id,
             'title' => $position->name,
             'description' => $this->faker->paragraph(),
+            'is_active' => 1,
         ];
     }
 }

@@ -19,9 +19,11 @@ class AccessSeeder extends Seeder
     {
         $menus = Menu::all();
         $adminId = Role::whereName('Administrator')->first()->id;
+        $userId = Role::whereName('User')->first()->id;
 
         foreach($menus as $menu) {
             Access::factory()->create(['role_id' => $adminId, 'menu_id' => $menu->id]);
+            Access::factory()->create(['role_id' => $userId, 'menu_id' => $menu->id]);
         }
 
         Admin::create(['role_id' => $adminId]);

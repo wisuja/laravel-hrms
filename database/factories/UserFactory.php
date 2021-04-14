@@ -47,4 +47,17 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    public function user() {
+        return $this->state(function($attributes) {
+            return [
+                'name' => 'User',
+                'email' => 'user@gmail.com',
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                'role_id' => function() {
+                    return Role::factory()->user()->create()->id;
+                }
+            ];
+        });
+    }
 }

@@ -33,7 +33,7 @@ class EmployeeDetailFactory extends Factory
             'email' => $this->faker->email(),
             'phone' => $this->faker->phoneNumber(),
             'address' => $this->faker->streetName(),
-            'photo' => 'profile-picture.jpg',
+            'photo' => 'photos/profile-picture.png',
             'cv' => 'cv.jpg',
             'last_education' => 'SMA',
             'gpa' => 4.0,
