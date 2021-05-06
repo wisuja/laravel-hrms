@@ -29,13 +29,18 @@ class PerformanceChart extends BaseChart
 
             $employeeScores = EmployeeScore::where('score_category_id', $category->id)->whereBetween('updated_at', [Carbon::today()->subMonth(), Carbon::tomorrow()])->get();
 
-            $totalScore = $employeeScores->reduce(function ($total, $current) {
-                return $total + $current->score;
-            }, 0);
-
-            $avgScore = $totalScore / count($employeeScores);
-            array_push($scores, $avgScore);
+            if(empty($employeeScores)) {
+                array_push($scores, 0);
+            } else {
+                $totalScore = $employeeScores->reduce(function ($total, $current) {
+                    return $total + $current->score;
+                }, 0);
+    
+                $avgScore = $totalScore / count($employeeScores);
+                array_push($scores, $avgScore);
+            }
         }
+
         return Chartisan::build()
             ->labels($labels)
             ->dataset('Score', $scores);

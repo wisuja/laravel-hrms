@@ -78,6 +78,10 @@ class AttendancesController extends Controller
             if ($checkForAttendance === null) {
                 $time = "IN";
 
+                if($now > $checkInTime) {
+                    return redirect()->route('attendances')->with('status', 'Please wait for checkin time.');
+                }
+
                 if($now <= $checkInTime) {
                     $type = "ONTIME";
                 } else {

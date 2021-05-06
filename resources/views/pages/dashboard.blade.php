@@ -64,14 +64,14 @@
     <div class="row">
       <div class="col-6 mb-3">
         <div class="bg-light text-dark card p-3">
-          <h4>Attendances</h4>
+          <h4>Last 2 Days Attendances</h4>
           <div id="attendances-chart" style="height: 300px">
           </div>
         </div>
       </div>
       <div class="col-6 mb-3">
         <div class="bg-light text-dark card p-3">
-          <h4>Performance</h4>
+          <h4>Monthly Performance</h4>
           <div id="performance-chart" style="height: 300px">
           </div>
         </div>
